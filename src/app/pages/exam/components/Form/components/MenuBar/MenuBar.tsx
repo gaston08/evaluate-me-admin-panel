@@ -1,15 +1,5 @@
-import * as React from 'react';
-import { useState } from 'react';
-import '../../create.scss';
-import { Color } from '@tiptap/extension-color';
-import ListItem from '@tiptap/extension-list-item';
-import TextStyle from '@tiptap/extension-text-style';
-import { EditorProvider, useCurrentEditor } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
+import { useCurrentEditor } from '@tiptap/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import {
 	faBold,
 	faItalic,
@@ -23,12 +13,8 @@ import {
 	faSquareCaretRight,
 	faParagraph,
 } from '@fortawesome/free-solid-svg-icons';
-import Grid from '@mui/material/Grid';
-import Exercise from '../../components/Exercise';
-import Exercises from '../../components/Exercises';
-import { exerciseType } from 'app/shared/interfaces/exercise';
 
-function MenuBar() {
+export default function MenuBar() {
 	const { editor } = useCurrentEditor();
 
 	if (!editor) {
@@ -213,114 +199,6 @@ function MenuBar() {
 					purple
 				</button>**/}
 			</div>
-		</div>
-	);
-}
-
-const extensions = [
-	Color.configure({ types: [TextStyle.name, ListItem.name] }),
-	TextStyle.configure({ types: [ListItem.name] }),
-	StarterKit.configure({
-		bulletList: {
-			keepMarks: true,
-			keepAttributes: false,
-		},
-		orderedList: {
-			keepMarks: true,
-			keepAttributes: false,
-		},
-	}),
-];
-
-export default function Create() {
-	const [option, setOption] = useState<string>('');
-	const [exercise, setExercise] = useState<exerciseType>(() => {
-		return {
-			id: window.self.crypto.randomUUID(),
-			question:
-				'<p>Escribe tu pregunta aquí. Puedes estilizar este texto con el editor!</p>',
-			options: [
-				{
-					id: window.self.crypto.randomUUID(),
-					title: 'Esta opción debe eliminarse.',
-				},
-			],
-		};
-	});
-
-	const update = (props: { editor: object }) => {
-		const editor: { getHTML: () => string } = props.editor;
-		setExercise((prev) => {
-			return {
-				...prev,
-				question: editor.getHTML(),
-			};
-		});
-	};
-
-	const handleSubmitOption = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		setExercise((prev) => {
-			const optArr = [...prev.options];
-			optArr.push({
-				id: window.self.crypto.randomUUID(),
-				title: option,
-			});
-			return {
-				...prev,
-				options: optArr,
-			};
-		});
-		setOption('');
-	};
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setOption(e.target.value);
-	};
-
-	return (
-		<div className="tiptapAppCreateExam">
-			<Grid container spacing={1}>
-				{/** this is a helper **/}
-				<Grid item xs={12} md={4} lg={4}></Grid>
-				<Grid
-					item
-					xs={12}
-					md={4}
-					lg={4}
-					sx={{ position: 'fixed', width: '100%' }}
-				>
-					<EditorProvider
-						slotBefore={<MenuBar />}
-						extensions={extensions}
-						content={''}
-						injectCSS={true}
-						onUpdate={update}
-					></EditorProvider>
-					<Typography variant="h6" gutterBottom sx={{ ml: 2, mt: 2 }}>
-						Añade más de una opción.
-					</Typography>
-					<form action="post" onSubmit={handleSubmitOption}>
-						<TextField
-							multiline
-							rows={4}
-							sx={{ mt: 0, width: '100%' }}
-							value={option}
-							onChange={handleChange}
-						/>
-						<Button variant="outlined" type="submit" sx={{ mt: 3 }}>
-							Agregar opción
-						</Button>
-					</form>
-				</Grid>
-				<Grid item xs={12} md={8} lg={8} className="gridRight">
-					<div className="previewContainer">
-						<Exercise exercise={exercise} canSelect={false} />
-					</div>
-					<div></div>
-					<Exercises />
-				</Grid>
-			</Grid>
 		</div>
 	);
 }
