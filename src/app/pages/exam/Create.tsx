@@ -4,6 +4,7 @@ import { ExerciseContext } from 'app/contexts/Exercise';
 import { contextExercise } from 'app/shared/interfaces/exercise';
 import Exercise from './components/Exercise';
 import Exercises from './components/Exercises';
+import ExamForm from './components/ExamForm';
 import Grid from '@mui/material/Grid';
 
 import './create.scss';
@@ -14,9 +15,10 @@ export default function Create() {
 	return (
 		<div className="tiptapAppCreateExam">
 			<Grid container spacing={1}>
-				{/** this is a helper **/}
-				<Grid item xs={12} md={4} lg={4}></Grid>
-				<Form />
+				<Grid item xs={12} md={4} lg={4} sx={{ width: '100%' }}>
+					<ExamForm />
+					<Form />
+				</Grid>
 				<Grid item xs={12} md={8} lg={8} className="gridRight">
 					<div className="previewContainer">
 						<Exercise exercise={currentExercise} canSelect={false} />

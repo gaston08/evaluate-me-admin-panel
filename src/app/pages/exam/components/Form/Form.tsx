@@ -3,7 +3,6 @@ import { useState, useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import TipTap from './components/TipTap';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import { contextExercise, exerciseType } from 'app/shared/interfaces/exercise';
@@ -34,7 +33,7 @@ export default function Form() {
 	};
 
 	return (
-		<Grid item xs={12} md={4} lg={4} sx={{ position: 'fixed', width: '100%' }}>
+		<>
 			<TipTap />
 			<Typography variant="h6" gutterBottom sx={{ ml: 2, mt: 2 }}>
 				Añade más de una opción.
@@ -51,6 +50,6 @@ export default function Form() {
 					Agregar opción
 				</Button>
 			</form>
-		</Grid>
+		</>
 	);
 }
