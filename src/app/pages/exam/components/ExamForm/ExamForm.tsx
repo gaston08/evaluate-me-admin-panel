@@ -2,8 +2,31 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { ExamContext } from 'app/contexts/Exam';
+import { examType, createExam } from 'app/shared/interfaces/exam';
 
 export default function ExamForm() {
+  const { setExam } = React.useContext<createExam>(ExamContext);
+  const [name, setName] = React.useState<string>('');
+  const [category, setCategory] = React.useState<string>('');
+  const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const changeCategory = (categ: string) => {
+    setCategory(categ);
+  };
+
+  const saveState = () => {
+    setExam((prev: examType) => {
+      return {
+        ...prev,
+        name,
+        category,
+      };
+    });
+  };
+
   return (
     <Box sx={{ p: 1 }}>
       <TextField
@@ -11,6 +34,11 @@ export default function ExamForm() {
         variant="outlined"
         placeholder="Por ej: ALGEBRA 1 UBA XXI"
         fullWidth
+        value={name}
+        onChange={changeName}
+        onBlur={() => {
+          saveState();
+        }}
       />
       <Autocomplete
         disablePortal
@@ -18,6 +46,15 @@ export default function ExamForm() {
         sx={{ width: 300, mt: 1 }}
         renderInput={(params) => <TextField {...params} label="Categoria" />}
         fullWidth
+        onChange={(
+          event: React.ChangeEvent<HTMLInputElement>,
+          newValue: string | null,
+        ) => {
+          changeCategory(newValue);
+        }}
+        onBlur={() => {
+          saveState();
+        }}
       />
     </Box>
   );

@@ -6,6 +6,7 @@ export const ExerciseContext = createContext<contextExercise | null>({
 	setCurrentExercise: () => {},
 });
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const defaultCurrentExercise = {
 	id: window.self.crypto.randomUUID(),
 	question:
