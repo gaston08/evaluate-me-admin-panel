@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import Form from './components/Form';
+import CurrentExerciseForm from './components/CurrentExerciseForm';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import { contextExercise } from 'app/shared/interfaces/exercise';
 import Exercise from './components/Exercise';
@@ -17,7 +17,7 @@ export default function Create() {
 			<Grid container spacing={1}>
 				<Grid item xs={12} md={4} lg={4}>
 					<ExamForm />
-					<Form />
+					<CurrentExerciseForm />
 				</Grid>
 				<Grid item xs={12} md={8} lg={8} className="gridRight">
 					<div className="previewContainer">

@@ -7,7 +7,7 @@ import TipTap from './components/TipTap';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import { contextExercise, exerciseType } from 'app/shared/interfaces/exercise';
 
-export default function Form() {
+export default function CurrentExerciseForm() {
 	const { setCurrentExercise } = useContext(ExerciseContext) as contextExercise;
 	const [option, setOption] = useState<string>('');
 
