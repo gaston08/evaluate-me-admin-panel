@@ -1,61 +1,75 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 import { ExamContext } from 'app/contexts/Exam';
-import { examType, createExam } from 'app/shared/interfaces/exam';
+import { createExam, examType } from 'app/shared/interfaces/exam';
 
 export default function ExamForm() {
-  const { setExam } = React.useContext<createExam>(ExamContext);
-  const [name, setName] = React.useState<string>('');
-  const [category, setCategory] = React.useState<string>('');
-  const changeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
+  const { setExam, exam } = React.useContext<createExam>(ExamContext);
 
-  const changeCategory = (categ: string) => {
-    setCategory(categ);
-  };
-
-  const saveState = () => {
+  const setCategory = (e: SelectChangeEvent) => {
     setExam((prev: examType) => {
       return {
         ...prev,
-        name,
-        category,
+        category: e.target.value,
+      };
+    });
+  };
+
+  const setYear = (e: SelectChangeEvent) => {
+    setExam((prev: examType) => {
+      return {
+        ...prev,
+        year: e.target.value,
       };
     });
   };
 
   return (
     <Box sx={{ p: 1 }}>
-      <TextField
-        label="Nombre del exámen"
-        variant="outlined"
-        placeholder="Por ej: ALGEBRA 1 UBA XXI"
-        fullWidth
-        value={name}
-        onChange={changeName}
-        onBlur={() => {
-          saveState();
-        }}
-      />
-      <Autocomplete
-        disablePortal
-        options={categories}
-        sx={{ width: 300, mt: 1 }}
-        renderInput={(params) => <TextField {...params} label="Categoria" />}
-        fullWidth
-        onChange={(
-          event: React.ChangeEvent<HTMLInputElement>,
-          newValue: string | null,
-        ) => {
-          changeCategory(newValue);
-        }}
-        onBlur={() => {
-          saveState();
-        }}
-      />
+      <FormControl fullWidth>
+        <InputLabel id="exam-year">Año</InputLabel>
+        <Select
+          labelId="exam-year"
+          label="Año"
+          onChange={setYear}
+          value={exam.year}
+        >
+          <MenuItem value={2024}>2024</MenuItem>
+          <MenuItem value={2023}>2023</MenuItem>
+          <MenuItem value={2022}>2022</MenuItem>
+          <MenuItem value={2021}>2021</MenuItem>
+          <MenuItem value={2020}>2020</MenuItem>
+          <MenuItem value={2019}>2019</MenuItem>
+          <MenuItem value={2018}>2018</MenuItem>
+          <MenuItem value={2017}>2017</MenuItem>
+          <MenuItem value={2016}>2016</MenuItem>
+          <MenuItem value={2015}>2015</MenuItem>
+          <MenuItem value={2014}>2014</MenuItem>
+          <MenuItem value={2013}>2013</MenuItem>
+        </Select>
+      </FormControl>
+
+      <FormControl fullWidth sx={{ mt: 1 }}>
+        <InputLabel id="exam-category">Categoría</InputLabel>
+        <Select
+          labelId="exam-category"
+          label="Categoría"
+          onChange={setCategory}
+          value={exam.category}
+        >
+          {categories.map((category) => {
+            return (
+              <MenuItem key={category.value} value={category.value}>
+                {category.label}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
     </Box>
   );
 }
