@@ -23,7 +23,7 @@ export default function Create() {
 						<Exercise
 							exercise={currentExercise}
 							canSelect={false}
-							canDelete={true}
+							canEdit={true}
 						/>
 					</div>
 					<div></div>

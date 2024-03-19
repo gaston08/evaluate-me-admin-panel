@@ -13,16 +13,17 @@ export default function CurrentExerciseForm() {
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setOption(e.target.value);
-		console.log(e.target.value);
 	};
 
 	const addOption = () => {
 		if (option === '') return;
+		const replacedOption: string = option.replaceAll('\n', '<br>');
+
 		setCurrentExercise((prev: exerciseType) => {
 			const optArr = [...prev.options];
 			optArr.push({
 				id: window.self.crypto.randomUUID(),
-				title: option,
+				title: replacedOption,
 			});
 			return {
 				...prev,
