@@ -3,7 +3,17 @@
   min-height: 100vh;
   min-width: 100vw;
 
-  button:not(.MuiButton-root):not(.MuiButtonBase-root) {
+  button.MuiIconButton-root {
+    color: red;
+  }
+
+  button.MuiIconButton-root:hover {
+    background: #ccc;
+  }
+
+  button:not(.MuiButton-root):not(.MuiButtonBase-root):not(
+      .MuiIconButton-root
+    ) {
     background: none;
     color: inherit;
     border: none;
@@ -25,7 +35,9 @@
     background: #ccc;
   }
 
-  button:hover:not(.disabled-btn, .MuiButton-root) {
+  button:hover:not(.disabled-btn):not(.MuiButton-root):not(
+      .MuiIconButton-root
+    ) {
     background-color: lightblue;
     filter: brightness(80%);
   }

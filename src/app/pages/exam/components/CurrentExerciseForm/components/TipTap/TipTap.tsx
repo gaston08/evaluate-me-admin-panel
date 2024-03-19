@@ -24,7 +24,7 @@ const extensions = [
 ];
 
 export default function TipTap() {
-	const { setCurrentExercise } = useContext(ExerciseContext) as contextExercise;
+	const { setCurrentExercise } = useContext(ExerciseContext) ;
 
 	const update = (props: { editor: object }) => {
 		const editor: { getHTML: () => string } = props.editor;

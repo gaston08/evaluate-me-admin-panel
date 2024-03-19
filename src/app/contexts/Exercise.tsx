@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { contextExercise } from 'app/shared/interfaces/exercise';
 
-export const ExerciseContext = createContext<contextExercise | null>({
+export const ExerciseContext = createContext<contextExercise>({
 	currentExercise: {},
 	setCurrentExercise: () => {},
 });

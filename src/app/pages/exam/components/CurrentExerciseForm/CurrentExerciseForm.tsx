@@ -5,14 +5,17 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TipTap from './components/TipTap';
 import { ExerciseContext } from 'app/contexts/Exercise';
-import { contextExercise, exerciseType } from 'app/shared/interfaces/exercise';
+import { exerciseType } from 'app/shared/interfaces/exercise';
 
 export default function CurrentExerciseForm() {
-	const { setCurrentExercise } = useContext(ExerciseContext) as contextExercise;
+	const { setCurrentExercise } = useContext(ExerciseContext);
 	const [option, setOption] = useState<string>('');
 
-	const handleSubmitOption = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setOption(e.target.value);
+	};
+
+	const addOption = () => {
 		if (option === '') return;
 		setCurrentExercise((prev: exerciseType) => {
 			const optArr = [...prev.options];
@@ -28,28 +31,25 @@ export default function CurrentExerciseForm() {
 		setOption('');
 	};
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setOption(e.target.value);
-	};
-
 	return (
 		<>
 			<TipTap />
 			<Typography variant="h6" gutterBottom sx={{ ml: 2, mt: 2 }}>
 				Añade más de una opción.
 			</Typography>
-			<form action="post" onSubmit={handleSubmitOption}>
-				<TextField
-					multiline
-					rows={4}
-					sx={{ mt: 0, width: '100%' }}
-					value={option}
-					onChange={handleChange}
-				/>
-				<Button variant="outlined" type="submit" sx={{ mt: 3 }}>
-					Agregar opción
-				</Button>
-			</form>
+			<TextField
+				multiline
+				rows={4}
+				sx={{ mt: 0, width: '100%' }}
+				value={option}
+				onChange={handleChange}
+			/>
+			<Button variant="outlined" sx={{ mt: 3 }} onClick={addOption}>
+				Agregar opción
+			</Button>
+			<Button variant="contained" type="submit" sx={{ mt: 3 }}>
+				Crear Ejercicio
+			</Button>
 		</>
 	);
 }
