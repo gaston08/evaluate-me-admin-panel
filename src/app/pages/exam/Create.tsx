@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import CurrentExerciseForm from './components/CurrentExerciseForm';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import Exercise from './components/Exercise';
-//import Exercises from './components/Exercises';
+import Exercises from './components/Exercises';
 import ExamForm from './components/ExamForm';
 import Grid from '@mui/material/Grid';
 
@@ -10,8 +10,6 @@ import './create.scss';
 
 export default function Create() {
 	const { currentExercise } = useContext(ExerciseContext);
-
-	console.log(currentExercise);
 
 	return (
 		<div className="tiptapAppCreateExam">
@@ -29,7 +27,7 @@ export default function Create() {
 						/>
 					</div>
 					<div></div>
-					{/**<Exercises />**/}
+					<Exercises />
 				</Grid>
 			</Grid>
 		</div>

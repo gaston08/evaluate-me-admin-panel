@@ -3,8 +3,8 @@ import IconButton from '@mui/material/IconButton';
 import {
 	faTrash,
 	faSquareCheck,
-	faUpLong,
-	faDownLong,
+	//faUpLong,
+	//faDownLong,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { contextExercise } from 'app/shared/interfaces/exercise';
@@ -60,12 +60,13 @@ export default function EditOptionGroup(props: EditOptionGroupProps) {
 
 	return (
 		<div>
-			<IconButton>
+			{/**<IconButton>
 				<FontAwesomeIcon icon={faUpLong} id="upIcon" />
 			</IconButton>
 			<IconButton>
 				<FontAwesomeIcon icon={faDownLong} id="downIcon" />
 			</IconButton>
+			**/}
 			<IconButton onClick={toggleCorrectOption}>
 				<FontAwesomeIcon icon={faSquareCheck} id="correctOptionIcon" />
 			</IconButton>
