@@ -11,7 +11,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import { ExamContext } from 'app/contexts/Exam';
 import { createExam, examType } from 'app/shared/interfaces/exam';
 import {
-  categories,
+  subjects,
   years,
   exam_types,
   exam_numbers,
@@ -20,11 +20,11 @@ import {
 export default function ExamForm() {
   const { setExam, exam } = React.useContext<createExam>(ExamContext);
 
-  const setCategory = (e: SelectChangeEvent) => {
+  const setSubject = (e: SelectChangeEvent) => {
     setExam((prev: examType) => {
       return {
         ...prev,
-        category: e.target.value,
+        subject: e.target.value,
       };
     });
   };
@@ -82,17 +82,17 @@ export default function ExamForm() {
           </FormControl>
 
           <FormControl fullWidth sx={{ mt: 1 }}>
-            <InputLabel id="exam-category">Categoría</InputLabel>
+            <InputLabel id="exam-subject">Materia</InputLabel>
             <Select
-              labelId="exam-category"
-              label="Categoría"
-              onChange={setCategory}
-              value={exam.category}
+              labelId="exam-subject"
+              label="Materia"
+              onChange={setSubject}
+              value={exam.subject}
             >
-              {categories.map((category) => {
+              {subjects.map((subject) => {
                 return (
-                  <MenuItem key={category.value} value={category.value}>
-                    {category.label}
+                  <MenuItem key={subject.value} value={subject.value}>
+                    {subject.label}
                   </MenuItem>
                 );
               })}

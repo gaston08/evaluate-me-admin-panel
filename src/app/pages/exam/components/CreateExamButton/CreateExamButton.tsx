@@ -21,8 +21,8 @@ export default function CreateExamButton() {
 		if (exam.year === '') {
 			setError('El año es obligatorio.');
 			setOpen(true);
-		} else if (exam.category === '') {
-			setError('Seleccione una categoría.');
+		} else if (exam.subject === '') {
+			setError('Seleccione una materia..');
 			setOpen(true);
 		} else if (exam.type === '') {
 			setError('Seleccione el tipo de exámen.');
