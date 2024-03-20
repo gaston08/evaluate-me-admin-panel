@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import CurrentExerciseForm from './components/CurrentExerciseForm';
+import CreateExamButton from './components/CreateExamButton';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import Exercise from './components/Exercise';
 import Exercises from './components/Exercises';
@@ -17,6 +18,7 @@ export default function Create() {
 				<Grid item xs={12} md={4} lg={4}>
 					<ExamForm />
 					<CurrentExerciseForm />
+					<CreateExamButton />
 				</Grid>
 				<Grid item xs={12} md={8} lg={8} className="gridRight">
 					<div className="previewContainer">
