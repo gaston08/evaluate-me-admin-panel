@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import CurrentExerciseForm from './components/CurrentExerciseForm';
-import CreateExamButton from './components/CreateExamButton';
+import CurrentExerciseForm from 'app/pages/exam/components/CurrentExerciseForm';
+import CreateExamButton from 'app/pages/exam/components/CreateExamButton';
 import { ExerciseContext } from 'app/contexts/Exercise';
-import Exercise from './components/Exercise';
-import Exercises from './components/Exercises';
-import ExamForm from './components/ExamForm';
+import Exercise from 'app/pages/exam/components/Exercise';
+import Exercises from 'app/pages/exam/components/Exercises';
+import ExamForm from 'app/pages/exam/components/ExamForm';
 import Grid from '@mui/material/Grid';
 
 import './create.scss';
