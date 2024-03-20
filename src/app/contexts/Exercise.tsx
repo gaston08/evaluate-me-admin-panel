@@ -12,6 +12,7 @@ export const defaultCurrentExercise = {
 	question:
 		'<p>Escribe tu pregunta aquí. Puedes estilizar este texto con el editor!</p>',
 	correctOptions: [],
+	argument: '',
 	options: [
 		{
 			id: window.self.crypto.randomUUID(),

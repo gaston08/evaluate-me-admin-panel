@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState, useContext } from 'react';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -18,7 +19,7 @@ export default function CurrentExerciseForm() {
 	const [open, setOpen] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleOption = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setOption(e.target.value);
 	};
 
@@ -62,6 +63,7 @@ export default function CurrentExerciseForm() {
 				question: '<p></p>',
 				correctOptions: [],
 				options: [],
+				argument: '',
 			});
 		}
 	};
@@ -70,8 +72,17 @@ export default function CurrentExerciseForm() {
 		setOpen(false);
 	};
 
+	const setArgument = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setCurrentExercise((prev: exerciseType) => {
+			return {
+				...prev,
+				argument: e.target.value,
+			};
+		});
+	};
+
 	return (
-		<>
+		<Box sx={{ pl: 1 }}>
 			<TipTap />
 			<Typography variant="h6" gutterBottom sx={{ ml: 2, mt: 2 }}>
 				Añade más de una opción.
@@ -81,11 +92,21 @@ export default function CurrentExerciseForm() {
 				rows={4}
 				sx={{ mt: 0, width: '100%' }}
 				value={option}
-				onChange={handleChange}
+				onChange={handleOption}
 			/>
 			<Button variant="outlined" sx={{ mt: 3 }} onClick={addOption}>
 				Agregar opción
 			</Button>
+			<Box sx={{ pt: 2 }}>
+				<Typography>Argumento</Typography>
+				<TextField
+					multiline
+					rows={4}
+					sx={{ mt: 0, width: '100%' }}
+					value={currentExercise.argument}
+					onChange={setArgument}
+				/>
+			</Box>
 			<Button variant="contained" onClick={addToExam} sx={{ mt: 3 }}>
 				Crear Ejercicio
 			</Button>
@@ -100,6 +121,6 @@ export default function CurrentExerciseForm() {
 					{error}
 				</Alert>
 			</Snackbar>
-		</>
+		</Box>
 	);
 }
