@@ -47,16 +47,7 @@ export default function Exercise(props: ExerciseProps) {
 							/>
 						);
 					} else {
-						return (
-							<Option
-								key={option.id}
-								exerciseId={exercise.id}
-								id={option.id}
-								title={option.title}
-								canSelect={canSelect}
-								canEdit={canEdit}
-							/>
-						);
+						return <Option key={option.id} title={option.title} />;
 					}
 				})}
 			</List>
