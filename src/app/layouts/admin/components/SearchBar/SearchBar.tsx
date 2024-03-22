@@ -11,7 +11,7 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 import { bgBlur } from 'app/theme/css';
 
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const HEADER_MOBILE = 64;
@@ -53,7 +53,7 @@ export default function Searchbar() {
       <div>
         {!open && (
           <IconButton onClick={handleOpen}>
-            <FontAwesomeIcon icon={faTrash} />
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
           </IconButton>
         )}
 
@@ -67,7 +67,7 @@ export default function Searchbar() {
               startAdornment={
                 <InputAdornment position="start">
                   <Box sx={{ color: 'text.disabled', width: 20, height: 20 }}>
-                    <FontAwesomeIcon icon={faTrash} />
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
                   </Box>
                 </InputAdornment>
               }
