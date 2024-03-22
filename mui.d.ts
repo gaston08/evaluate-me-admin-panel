@@ -12,6 +12,7 @@ interface MyPaletteExtensions {
     default: string;
     neutral: string;
     secondary: string;
+    primary: string;
   };
 }
 
