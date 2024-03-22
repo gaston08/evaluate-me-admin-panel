@@ -17,7 +17,7 @@ export default function NavItem({ item }: { item: navConfig }) {
   return (
     <ListItemButton
       component={RouterLink}
-      to={item.path}
+      to={`${pathname}${item.path}`}
       sx={{
         minHeight: 44,
         borderRadius: 0.75,
