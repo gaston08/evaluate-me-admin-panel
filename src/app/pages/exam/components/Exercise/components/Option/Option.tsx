@@ -13,7 +13,7 @@ export default function Option(props: OptionProps) {
 		<ListItemButton
 			sx={{
 				'&:hover, &.Mui-selected, &.Mui-selected:hover': {
-					backgroundColor: theme.custom.background.main,
+					backgroundColor: theme.palette.background.paper,
 				},
 				display: 'flex',
 				justifyContent: 'space-between',

@@ -8,7 +8,7 @@ import { ExamContext, defaultCurrentExam } from './contexts/Exam';
 import { exerciseType, contextExercise } from 'app/shared/interfaces/exercise';
 import { contextExam } from 'app/shared/interfaces/exam';
 
-import ThemeWrapper from 'app/components/ThemeWrapper';
+import ThemeProvider from 'app/theme';
 
 export default function App() {
   const [exercises, setExercises] = useState<Array<exerciseType>>([]);
@@ -42,9 +42,9 @@ export default function App() {
               setCurrentExercise,
             }}
           >
-            <ThemeWrapper>
+            <ThemeProvider>
               <RouterProvider router={router} />
-            </ThemeWrapper>
+            </ThemeProvider>
           </ExerciseContext.Provider>
         </ExercisesContext.Provider>
       </ExamContext.Provider>

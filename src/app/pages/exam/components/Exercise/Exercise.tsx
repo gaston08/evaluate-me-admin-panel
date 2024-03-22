@@ -24,7 +24,7 @@ export default function Exercise(props: ExerciseProps) {
 		<Box sx={{ width: '100%', mb: 4 }}>
 			<Paper
 				elevation={0}
-				sx={{ p: 2, background: theme.custom.background.light }}
+				sx={{ p: 2, background: theme.palette.background.paper }}
 			>
 				<div
 					dangerouslySetInnerHTML={{

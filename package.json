@@ -17,6 +17,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@faker-js/faker": "^8.4.1",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -26,12 +27,15 @@
     "@tiptap/pm": "^2.1.13",
     "@tiptap/react": "^2.1.13",
     "@tiptap/starter-kit": "^2.1.13",
+    "@types/numeral": "^2.0.5",
     "axios": "^1.6.3",
     "bson": "^4.0.2",
+    "date-fns": "^3.6.0",
     "formik": "^2.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
+    "simplebar-react": "^3.2.4",
     "vite-tsconfig-paths": "^4.2.3"
   },
   "devDependencies": {

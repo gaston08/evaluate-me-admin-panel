@@ -4,6 +4,7 @@ import { Create } from 'app/pages/exam';
 import { SignIn } from 'app/pages/auth';
 
 import { RequireAuth, NoRequireAuth } from 'app/layouts/auth';
+import { AdminLayout } from 'app/layouts/admin';
 
 export const arrRoutes = [
   {
@@ -11,12 +12,16 @@ export const arrRoutes = [
     element: <Navigate to="/auth/login" replace />,
   },
   {
-    path: '/admin/',
+    path: '/admin',
+    element: <AdminLayout />,
+  },
+  {
+    path: '/temp/',
     errorElement: <Error />,
     element: <RequireAuth />,
     children: [
       {
-        path: '/admin/exam/create',
+        path: '/temp/exam/create',
         element: <Create />,
       },
     ],
