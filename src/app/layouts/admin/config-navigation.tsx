@@ -17,32 +17,32 @@ interface navConfig {
 const navConfig: Array<navConfig> = [
   {
     title: 'dashboard',
-    path: '/',
+    path: '/admin/',
     icon: icon('ic_analytics'),
   },
   {
-    title: 'user',
-    path: '/user',
+    title: 'users',
+    path: '/admin/users',
     icon: icon('ic_user'),
   },
   {
     title: 'product',
-    path: '/products',
+    path: '/admin/products',
     icon: icon('ic_cart'),
   },
   {
     title: 'blog',
-    path: '/blog',
+    path: '/admin/blog',
     icon: icon('ic_blog'),
   },
   {
     title: 'login',
-    path: '/login',
+    path: '/admin/login',
     icon: icon('ic_lock'),
   },
   {
     title: 'Not found',
-    path: '/404',
+    path: '/admin/404',
     icon: icon('ic_disabled'),
   },
 ];

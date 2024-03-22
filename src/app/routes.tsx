@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Error from 'app/pages/error';
 import { Create } from 'app/pages/exam';
 import { SignIn } from 'app/pages/auth';
+import Users from 'app/pages/admin/Users';
 
 import { RequireAuth, NoRequireAuth } from 'app/layouts/auth';
 import { AdminLayout } from 'app/layouts/admin';
@@ -14,6 +15,12 @@ export const arrRoutes = [
   {
     path: '/admin',
     element: <AdminLayout />,
+    children: [
+      {
+        path: '/admin/users',
+        element: <Users />,
+      },
+    ],
   },
   {
     path: '/temp/',
