@@ -1,211 +1,104 @@
-import { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-//import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Link from '@mui/material/Link';
+import Card from '@mui/material/Card';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import LinkMui from '@mui/material/Link';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import { Formik } from 'formik';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { axiosPost } from 'app/utils/axios';
-import { getExpireTime, enumTime, setToken } from 'app/utils/common';
+import { alpha, useTheme } from '@mui/material/styles';
+
+import { bgGradient } from 'app/theme/css';
+
+import Logo from 'app/components/Logo';
+
 import {
-	apiPostResponse,
-	expressError,
-} from 'app/shared/interfaces/api-response';
+  faGoogle,
+  faFacebookF,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function SignIn() {
-	const location = useLocation() as { state?: { signup: string } };
-	const [error, setError] = useState<string>('');
-	const navigate = useNavigate();
-	return (
-		<Formik
-			initialValues={{
-				email: 'gaston08pedraza@gmail.com',
-				password: 'abcd1234',
-				rememberLogin: true,
-			}}
-			validate={(values) => {
-				const errors = {};
+import From from './components/Form';
 
-				if (!values.email) {
-					errors.email = 'El campo es obligatorio';
-				} else if (
-					!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-				) {
-					errors.email = 'Dirección de correo electrónico no válida';
-				}
+export default function LoginView() {
+  const theme = useTheme();
 
-				if (!values.password) {
-					errors.password = 'El campo es obligatorio';
-				} else if (values.password.length < 8) {
-					errors.password = 'La contraseña debe poseer al menos 8 caracteres';
-				}
+  return (
+    <Box
+      sx={{
+        ...bgGradient({
+          color: alpha(theme.palette.background.default, 0.9),
+          imgUrl: '/assets/background/overlay_4.jpg',
+        }),
+        height: 1,
+      }}
+    >
+      <Logo
+        sx={{
+          position: 'fixed',
+          top: { xs: 16, md: 24 },
+          left: { xs: 16, md: 24 },
+        }}
+      />
 
-				return errors;
-			}}
-			onSubmit={async (values, obj) => {
-				const data = {
-					email: values.email,
-					password: values.password,
-				};
+      <Stack alignItems="center" justifyContent="center" sx={{ height: 1 }}>
+        <Card
+          sx={{
+            p: 5,
+            width: 1,
+            maxWidth: 420,
+          }}
+        >
+          <Typography variant="h4">Sign in to Minimal</Typography>
 
-				const result: apiPostResponse = await axiosPost('api/login', data);
-				if (result.ok) {
-					let access_token_expires_in: number;
-					if (values.rememberLogin) {
-						access_token_expires_in = getExpireTime(7, enumTime.DAY);
-					} else {
-						access_token_expires_in = getExpireTime(5, enumTime.HOUR);
-					}
-					setToken(result.data.token, access_token_expires_in);
-					navigate('/admin/exam/create');
-				} else {
-					setError(result.error);
-					if (result.errors) {
-						result.errors.forEach((err: expressError): void => {
-							obj
-								.setFieldTouched(err.path, true)
-								.then(() => {
-									obj.setFieldError(err.path, err.msg);
-								})
-								.catch(console.error);
-						});
-					}
-				}
-				obj.setSubmitting(false);
-			}}
-		>
-			{({
-				values,
-				errors,
-				touched,
-				handleChange,
-				handleBlur,
-				handleSubmit,
-				setFieldValue,
-				isValid,
-			}) => (
-				<Box
-					sx={{
-						marginTop: 8,
-						display: 'flex',
-						flexDirection: 'column',
-						alignItems: 'center',
-					}}
-				>
-					<Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-						{/**<LockOutlinedIcon />**/}
-					</Avatar>
-					<Typography component="h1" variant="h5">
-						Inicio de sesión
-					</Typography>
-					<Box
-						component="form"
-						noValidate
-						onSubmit={handleSubmit}
-						sx={{ mt: 3 }}
-					>
-						<Grid container spacing={2}>
-							{location.state?.signup ? (
-								<Grid item xs={12}>
-									<Alert severity="success">
-										<AlertTitle>Correcto</AlertTitle>
-										Usuario creado con éxito.{' '}
-										<strong>Ahora puedes iniciar sesión.</strong>
-									</Alert>
-								</Grid>
-							) : null}
+          <Typography variant="body2" sx={{ mt: 2, mb: 5 }}>
+            Don’t have an account?
+            <Link variant="subtitle2" sx={{ ml: 0.5 }}>
+              Get started
+            </Link>
+          </Typography>
 
-							{location.state?.reset ? (
-								<Grid item xs={12}>
-									<Alert severity="success">
-										<AlertTitle>Correcto</AlertTitle>
-										La contraseña ha cambiado.{' '}
-										<strong>Ahora puedes iniciar sesión.</strong>
-									</Alert>
-								</Grid>
-							) : null}
+          <Stack direction="row" spacing={2}>
+            <Button
+              fullWidth
+              size="large"
+              color="inherit"
+              variant="outlined"
+              sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
+            >
+              <FontAwesomeIcon icon={faGoogle} />
+            </Button>
 
-							<Grid item xs={12}>
-								<TextField
-									error={errors.email && touched.email}
-									helperText={errors.email}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.email}
-									fullWidth
-									label="Correo electrónico"
-									name="email"
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
-									error={errors.password && touched.password}
-									helperText={errors.password}
-									onChange={handleChange}
-									onBlur={handleBlur}
-									value={values.password}
-									fullWidth
-									label="Contraseña"
-									type="password"
-									name="password"
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<FormControlLabel
-									control={
-										<Checkbox color="primary" checked={values.rememberLogin} />
-									}
-									label="Recordar inicio de sesión"
-									onChange={(val): void =>
-										setFieldValue('rememberLogin', val.target.checked)
-									}
-								/>
-							</Grid>
-							{error !== '' ? (
-								<Grid item xs={12}>
-									<Alert severity="error">{error}</Alert>
-								</Grid>
-							) : null}
-						</Grid>
-						<Button
-							type="submit"
-							fullWidth
-							variant="contained"
-							sx={{ mt: 3, mb: 2 }}
-							disabled={!isValid}
-						>
-							Iniciar sesión
-						</Button>
-						<Grid container justifyContent="flex-start">
-							<Grid item>
-								<LinkMui variant="body" component="div">
-									<Link to="/auth/signup" style={{ textDecoration: 'none' }}>
-										¿No tienes una cuenta? Create una
-									</Link>
-								</LinkMui>
-							</Grid>
-							<Grid item>
-								<LinkMui variant="body" component="div">
-									<Link
-										to="/auth/forgot/password"
-										style={{ textDecoration: 'none' }}
-									>
-										¿Olvidaste tu contraseña?
-									</Link>
-								</LinkMui>
-							</Grid>
-						</Grid>
-					</Box>
-				</Box>
-			)}
-		</Formik>
-	);
+            <Button
+              fullWidth
+              size="large"
+              color="inherit"
+              variant="outlined"
+              sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
+            >
+              <FontAwesomeIcon icon={faFacebookF} />
+            </Button>
+
+            <Button
+              fullWidth
+              size="large"
+              color="inherit"
+              variant="outlined"
+              sx={{ borderColor: alpha(theme.palette.grey[500], 0.16) }}
+            >
+              <FontAwesomeIcon icon={faTwitter} />
+            </Button>
+          </Stack>
+
+          <Divider sx={{ my: 3 }}>
+            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+              OR
+            </Typography>
+          </Divider>
+
+          <From />
+        </Card>
+      </Stack>
+    </Box>
+  );
 }
