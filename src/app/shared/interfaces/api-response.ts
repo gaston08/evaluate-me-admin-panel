@@ -1,5 +1,4 @@
 import { examType } from './exam';
-import { UserType } from './user';
 
 export interface expressError {
 	type: string;
@@ -32,6 +31,12 @@ export interface apiGetAllSubjects extends apiGetResponse {
 
 export interface apiGetAllUsersResponse extends apiGetResponse {
 	data: {
-		users: Array<UserType>;
+		users: Array<{
+			_id: string;
+			email: string;
+			firstName: string;
+			lastName: string;
+			role: string;
+		}>;
 	};
 }

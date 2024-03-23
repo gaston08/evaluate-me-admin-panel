@@ -23,16 +23,6 @@ import { UserType } from 'app/shared/interfaces/user';
 import { apiGetAllUsersResponse } from 'app/shared/interfaces/api-response';
 import { axiosGet } from 'app/utils/axios';
 
-const users: Array<UserType> = [
-	{
-		_id: 'iajdiaw',
-		name: 'gaston' + ' ' + 'pedraza',
-		email: 'gaston08pedraza@gmail.com',
-		role: 'admin',
-		avatarUrl: '/no/avatar',
-	},
-];
-
 export default function UsersPage() {
 	const [page, setPage] = React.useState<number>(0);
 	const [order, setOrder] = React.useState<string>('asc');
@@ -41,13 +31,25 @@ export default function UsersPage() {
 	const [filterName, setFilterName] = React.useState<string>('');
 	const [rowsPerPage, setRowsPerPage] = React.useState<number>(5);
 	const [loading, setLoading] = React.useState<boolean>(false);
+	const [users, setUsers] = React.useState<Array<UserType>>([]);
 
 	React.useEffect(() => {
 		async function getAllUsers() {
 			setLoading(true);
 			const result: apiGetAllUsersResponse = await axiosGet('api/admin/user');
-			console.log(loading);
 			if (result.ok) {
+				const newArrUsers = result.data.users.map((usr) => {
+					return {
+						_id: usr._id,
+						role: usr.role,
+						firstName: usr.firstName,
+						lastName: usr.lastName,
+						email: usr.email,
+						name: usr.firstName + ' ' + usr.lastName,
+					};
+				});
+				setUsers(newArrUsers);
+				console.log(loading);
 				setLoading(false);
 			} else {
 				setLoading(false);

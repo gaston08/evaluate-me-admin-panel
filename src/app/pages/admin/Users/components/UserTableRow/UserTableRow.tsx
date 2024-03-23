@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
 import TableRow from '@mui/material/TableRow';
@@ -11,7 +12,11 @@ import IconButton from '@mui/material/IconButton';
 
 import Label from 'app/components/Label';
 
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEllipsisVertical,
+  faPenToSquare,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { UserType } from 'app/shared/interfaces/user';
@@ -57,12 +62,12 @@ export default function UserTableRow({
         <TableCell>{user.role}</TableCell>
 
         <TableCell>
-          <Label color={ColorEnum.SUCCESS}>{status}</Label>
+          <Label color={ColorEnum.SUCCESS}>Activo</Label>
         </TableCell>
 
         <TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <FontAwesomeIcon icon={faEllipsisVertical} />
           </IconButton>
         </TableCell>
       </TableRow>
@@ -78,13 +83,17 @@ export default function UserTableRow({
         }}
       >
         <MenuItem onClick={handleCloseMenu}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-          Edit
+          <Box sx={{ mr: 2 }}>
+            <FontAwesomeIcon icon={faPenToSquare} />
+          </Box>
+          Editar
         </MenuItem>
 
         <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-          Delete
+          <Box sx={{ mr: 2 }}>
+            <FontAwesomeIcon icon={faTrash} />
+          </Box>
+          Eliminar
         </MenuItem>
       </Popover>
     </>
