@@ -52,20 +52,12 @@ export default function UserTableRow({
           </Stack>
         </TableCell>
 
-        <TableCell>{user.company}</TableCell>
+        <TableCell>{user.email}</TableCell>
 
         <TableCell>{user.role}</TableCell>
 
-        <TableCell align="center">{user.isVerified ? 'Yes' : 'No'}</TableCell>
-
         <TableCell>
-          <Label
-            color={
-              user.status === 'banned' ? ColorEnum.ERROR : ColorEnum.SUCCESS
-            }
-          >
-            {user.status}
-          </Label>
+          <Label color={ColorEnum.SUCCESS}>{status}</Label>
         </TableCell>
 
         <TableCell align="right">

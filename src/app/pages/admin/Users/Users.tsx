@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { sample } from 'lodash';
-import { faker } from '@faker-js/faker';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
@@ -22,29 +20,18 @@ import TableEmptyRows from './components/TableEmptyRows';
 import UserTableToolbar from './components/UserTableToolbar';
 import { emptyRows, applyFilter, getComparator } from './utils';
 import { UserType } from 'app/shared/interfaces/user';
+import { apiGetAllUsersResponse } from 'app/shared/interfaces/api-response';
+import { axiosGet } from 'app/utils/axios';
 
-const users: Array<UserType> = Array(24)
-	.fill(undefined)
-	.map((_, index) => ({
-		id: faker.string.uuid(),
-		avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
-		name: faker.person.fullName(),
-		company: faker.company.name(),
-		isVerified: faker.datatype.boolean(),
-		status: sample(['active', 'banned']),
-		role: sample([
-			'Leader',
-			'Hr Manager',
-			'UI Designer',
-			'UX Designer',
-			'UI/UX Designer',
-			'Project Manager',
-			'Backend Developer',
-			'Full Stack Designer',
-			'Front End Developer',
-			'Full Stack Developer',
-		]),
-	}));
+const users: Array<UserType> = [
+	{
+		_id: 'iajdiaw',
+		name: 'gaston' + ' ' + 'pedraza',
+		email: 'gaston08pedraza@gmail.com',
+		role: 'admin',
+		avatarUrl: '/no/avatar',
+	},
+];
 
 export default function UsersPage() {
 	const [page, setPage] = React.useState<number>(0);
@@ -53,12 +40,36 @@ export default function UsersPage() {
 	const [orderBy, setOrderBy] = React.useState<string>('name');
 	const [filterName, setFilterName] = React.useState<string>('');
 	const [rowsPerPage, setRowsPerPage] = React.useState<number>(5);
+	const [loading, setLoading] = React.useState<boolean>(false);
 
-	const handleSort = (event: React.MouseEvent<HTMLElement>, id: string) => {
-		const isAsc = orderBy === id && order === 'asc';
-		if (id !== '') {
+	React.useEffect(() => {
+		async function getAllUsers() {
+			setLoading(true);
+			const result: apiGetAllUsersResponse = await axiosGet('api/admin/user');
+			console.log(loading);
+			if (result.ok) {
+				setLoading(false);
+			} else {
+				setLoading(false);
+				/*setError(result.error);
+				setOpen(true);
+				if (result.errors) {
+					result.errors.forEach((err: expressError): void => {
+						setError(err.msg);
+						setOpen(true);
+					});
+				}*/
+			}
+		}
+
+		getAllUsers().then().catch(console.error);
+	}, []);
+
+	const handleSort = (event: React.MouseEvent<HTMLElement>, _id: string) => {
+		const isAsc = orderBy === _id && order === 'asc';
+		if (_id !== '') {
 			setOrder(isAsc ? 'desc' : 'asc');
-			setOrderBy(id);
+			setOrderBy(_id);
 		}
 	};
 
@@ -153,11 +164,10 @@ export default function UsersPage() {
 								onRequestSort={handleSort}
 								onSelectAllClick={handleSelectAllClick}
 								headLabel={[
-									{ id: 'name', label: 'Name' },
-									{ id: 'company', label: 'Company' },
-									{ id: 'role', label: 'Role' },
-									{ id: 'isVerified', label: 'Verified', align: 'center' },
-									{ id: 'status', label: 'Status' },
+									{ id: 'name', label: 'Nombre' },
+									{ id: 'email', label: 'Email' },
+									{ id: 'role', label: 'Rol' },
+									{ id: 'status', label: 'Estado' },
 									{ id: '' },
 								]}
 							/>
@@ -167,7 +177,7 @@ export default function UsersPage() {
 									.map((row) => (
 										<UserTableRow
 											user={row}
-											key={row.id}
+											key={row._id}
 											selected={selected.includes(row.name)}
 											handleClick={(event: React.MouseEvent<HTMLElement>) => {
 												handleClick(event, row.name);

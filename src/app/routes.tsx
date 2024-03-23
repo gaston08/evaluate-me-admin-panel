@@ -14,11 +14,17 @@ export const arrRoutes = [
   },
   {
     path: '/admin',
-    element: <AdminLayout />,
+    element: <RequireAuth />,
     children: [
       {
-        path: '/admin/users',
-        element: <Users />,
+        path: '/admin',
+        element: <AdminLayout />,
+        children: [
+          {
+            path: '/admin/users',
+            element: <Users />,
+          },
+        ],
       },
     ],
   },

@@ -1,9 +1,7 @@
 export interface UserType {
-	id: string;
-	avatarUrl: string;
+	_id: string;
 	name: string;
-	company: string;
-	isVerified: boolean;
-	status: string;
+	email: string;
 	role: string;
+	avatarUrl: string;
 }
