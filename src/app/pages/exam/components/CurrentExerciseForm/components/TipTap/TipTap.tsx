@@ -2,11 +2,12 @@ import { useContext } from 'react';
 import { Color } from '@tiptap/extension-color';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
-import { EditorProvider } from '@tiptap/react';
+import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { ExerciseContext, defaultCurrentExercise } from 'app/contexts/Exercise';
+import { ExerciseContext } from 'app/contexts/Exercise';
 import { contextExercise } from 'app/shared/interfaces/exercise';
 import MenuBar from '../MenuBar';
+import { EditorContent } from '@tiptap/react';
 
 const extensions = [
 	Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -24,25 +25,27 @@ const extensions = [
 ];
 
 export default function TipTap() {
-	const { setCurrentExercise } = useContext(ExerciseContext) ;
+	console.log('tiptap');
+	const { setCurrentExercise } = useContext(ExerciseContext);
 
-	const update = (props: { editor: object }) => {
-		const editor: { getHTML: () => string } = props.editor;
-		setCurrentExercise((prev: contextExercise) => {
-			return {
-				...prev,
-				question: editor.getHTML(),
-			};
-		});
-	};
+	const editor = useEditor({
+		extensions,
+		content: '<p></p>',
+		onUpdate({ editor }) {
+			setCurrentExercise((prev: contextExercise) => {
+				return {
+					...prev,
+					question: [editor.getHTML()],
+				};
+			});
+		},
+	});
+	if (editor === null) return null;
 
 	return (
-		<EditorProvider
-			slotBefore={<MenuBar />}
-			extensions={extensions}
-			content={defaultCurrentExercise.question}
-			injectCSS={true}
-			onUpdate={update}
-		></EditorProvider>
+		<div>
+			<MenuBar editor={editor} />
+			<EditorContent editor={editor} />
+		</div>
 	);
 }

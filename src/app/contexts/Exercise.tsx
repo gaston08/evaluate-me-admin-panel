@@ -10,7 +10,7 @@ export const ExerciseContext = createContext<contextExercise>({
 export const defaultCurrentExercise = {
 	id: window.self.crypto.randomUUID(),
 	question:
-		'<p>Escribe tu pregunta aquí. Puedes estilizar este texto con el editor!</p>',
+		'Escribe tu pregunta aquí. Puedes estilizar este texto con el editor!',
 	correctOptions: [],
 	argument: '',
 	options: [

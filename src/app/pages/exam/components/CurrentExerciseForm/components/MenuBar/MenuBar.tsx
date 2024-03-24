@@ -1,4 +1,4 @@
-import { useCurrentEditor } from '@tiptap/react';
+import { Editor } from '@tiptap/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faBold,
@@ -14,9 +14,7 @@ import {
 	faParagraph,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function MenuBar() {
-	const { editor } = useCurrentEditor();
-
+export default function MenuBar({ editor }: { editor: Editor | null }) {
 	if (!editor) {
 		return null;
 	}

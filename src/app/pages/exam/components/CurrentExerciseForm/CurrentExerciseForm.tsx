@@ -9,12 +9,12 @@ import Alert from '@mui/material/Alert';
 import TipTap from './components/TipTap';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import { exerciseType } from 'app/shared/interfaces/exercise';
-import { ExamContext } from 'app/contexts/Exam';
-import { examType, createExam } from 'app/shared/interfaces/exam';
+
+import ArgumentGeneral from './components/ArgumentGeneral';
+import CreateExerciseButton from './components/CreateExerciseButton';
 
 export default function CurrentExerciseForm() {
-	const { setExam } = React.useContext<createExam>(ExamContext);
-	const { setCurrentExercise, currentExercise } = useContext(ExerciseContext);
+	const { setCurrentExercise } = useContext(ExerciseContext);
 	const [option, setOption] = useState<string>('');
 	const [open, setOpen] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
@@ -41,44 +41,8 @@ export default function CurrentExerciseForm() {
 		setOption('');
 	};
 
-	const addToExam = () => {
-		if (currentExercise.question.length < 10) {
-			setError('La consigna es obligatoria.');
-			setOpen(true);
-		} else if (currentExercise.options.length < 2) {
-			setError('Añade al menos dos opciones.');
-			setOpen(true);
-		} else if (currentExercise.correctOptions.length === 0) {
-			setError('Añade al menos una respuesta correcta');
-			setOpen(true);
-		} else {
-			setExam((prev: examType) => {
-				return {
-					...prev,
-					exercises: [...prev.exercises, currentExercise],
-				};
-			});
-			setCurrentExercise({
-				id: window.self.crypto.randomUUID(),
-				question: '<p></p>',
-				correctOptions: [],
-				options: [],
-				argument: '',
-			});
-		}
-	};
-
 	const handleClose = () => {
 		setOpen(false);
-	};
-
-	const setArgument = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setCurrentExercise((prev: exerciseType) => {
-			return {
-				...prev,
-				argument: e.target.value,
-			};
-		});
 	};
 
 	return (
@@ -99,17 +63,9 @@ export default function CurrentExerciseForm() {
 			</Button>
 			<Box sx={{ pt: 2 }}>
 				<Typography>Argumento</Typography>
-				<TextField
-					multiline
-					rows={4}
-					sx={{ mt: 0, width: '100%' }}
-					value={currentExercise.argument}
-					onChange={setArgument}
-				/>
+				<ArgumentGeneral />
 			</Box>
-			<Button variant="contained" onClick={addToExam} sx={{ mt: 3 }}>
-				Crear Ejercicio
-			</Button>
+			<CreateExerciseButton setError={setError} setOpen={setOpen} />
 
 			<Snackbar
 				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}

@@ -1,17 +1,13 @@
-import { useContext } from 'react';
+import Grid from '@mui/material/Grid';
 import CurrentExerciseForm from 'app/pages/exam/components/CurrentExerciseForm';
 import CreateExamButton from 'app/pages/exam/components/CreateExamButton';
-import { ExerciseContext } from 'app/contexts/Exercise';
-import Exercise from 'app/pages/exam/components/Exercise';
 import Exercises from 'app/pages/exam/components/Exercises';
 import ExamForm from 'app/pages/exam/components/ExamForm';
-import Grid from '@mui/material/Grid';
+import PreviewExercise from 'app/pages/exam/components/PreviewExercise';
 
 import './create.scss';
 
 export default function Create() {
-	const { currentExercise } = useContext(ExerciseContext);
-
 	return (
 		<div className="tiptapAppCreateExam">
 			<Grid container spacing={1}>
@@ -22,11 +18,7 @@ export default function Create() {
 				</Grid>
 				<Grid item xs={12} md={8} lg={8} className="gridRight">
 					<div className="previewContainer">
-						<Exercise
-							exercise={currentExercise}
-							canSelect={false}
-							canEdit={true}
-						/>
+						<PreviewExercise />
 					</div>
 					<div></div>
 					<Exercises />
