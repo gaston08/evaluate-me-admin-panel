@@ -1,11 +1,6 @@
 import { useContext } from 'react';
 import IconButton from '@mui/material/IconButton';
-import {
-	faTrash,
-	faSquareCheck,
-	//faUpLong,
-	//faDownLong,
-} from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faSquareCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { contextExercise } from 'app/shared/interfaces/exercise';
 import { ExerciseContext } from 'app/contexts/Exercise';
@@ -23,15 +18,17 @@ export default function EditOptionGroup(props: EditOptionGroupProps) {
 
 	const deleteOption = () => {
 		setCurrentExercise((prev: exerciseType) => {
-			const optArr = prev.options.filter((obj) => {
-				return obj.id !== id;
+			const newOptions = prev.options.map((optArr) => {
+				return optArr.filter((obj) => {
+					return obj.id !== id;
+				});
 			});
 			const newCorrectOptions: Array<string> = prev.correctOptions.filter(
 				(prevOpt) => prevOpt !== id,
 			);
 			return {
 				...prev,
-				options: optArr,
+				options: newOptions,
 				correctOptions: newCorrectOptions,
 			};
 		});
@@ -60,13 +57,6 @@ export default function EditOptionGroup(props: EditOptionGroupProps) {
 
 	return (
 		<div>
-			{/**<IconButton>
-				<FontAwesomeIcon icon={faUpLong} id="upIcon" />
-			</IconButton>
-			<IconButton>
-				<FontAwesomeIcon icon={faDownLong} id="downIcon" />
-			</IconButton>
-			**/}
 			<IconButton onClick={toggleCorrectOption}>
 				<FontAwesomeIcon icon={faSquareCheck} id="correctOptionIcon" />
 			</IconButton>

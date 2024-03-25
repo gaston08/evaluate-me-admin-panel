@@ -9,26 +9,17 @@ export const ExerciseContext = createContext<contextExercise>({
 // eslint-disable-next-line react-refresh/only-export-components
 export const defaultCurrentExercise = {
 	id: window.self.crypto.randomUUID(),
-	question:
-		'Escribe tu pregunta aquí. Puedes estilizar este texto con el editor!',
+	question: ['<p>titulo 1</p>', '<p>titulo 2</p>'],
 	correctOptions: [],
 	argument: '',
 	options: [
-		{
-			id: window.self.crypto.randomUUID(),
-			title: 'opcion 1',
-		},
-		{
-			id: window.self.crypto.randomUUID(),
-			title: 'opcion 2',
-		},
-		{
-			id: window.self.crypto.randomUUID(),
-			title: 'opcion 3',
-		},
-		{
-			id: window.self.crypto.randomUUID(),
-			title: 'opcion 4',
-		},
+		[
+			{ id: 1, title: 'hola' },
+			{ id: 2, title: 'option 2' },
+		],
+		[
+			{ id: 3, title: 'opt' },
+			{ id: 4, title: 'lastoption' },
+		],
 	],
 };

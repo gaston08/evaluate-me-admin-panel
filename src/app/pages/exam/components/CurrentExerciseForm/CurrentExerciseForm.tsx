@@ -11,7 +11,7 @@ import { ExerciseContext } from 'app/contexts/Exercise';
 import { exerciseType } from 'app/shared/interfaces/exercise';
 
 import ArgumentGeneral from './components/ArgumentGeneral';
-import CreateExerciseButton from './components/CreateExerciseButton';
+import GroupButtons from './components/GroupButtons';
 
 export default function CurrentExerciseForm() {
 	const { setCurrentExercise } = useContext(ExerciseContext);
@@ -29,7 +29,7 @@ export default function CurrentExerciseForm() {
 
 		setCurrentExercise((prev: exerciseType) => {
 			const optArr = [...prev.options];
-			optArr.push({
+			optArr[optArr.length - 1].push({
 				id: window.self.crypto.randomUUID(),
 				title: replacedOption,
 			});
@@ -65,7 +65,7 @@ export default function CurrentExerciseForm() {
 				<Typography>Argumento</Typography>
 				<ArgumentGeneral />
 			</Box>
-			<CreateExerciseButton setError={setError} setOpen={setOpen} />
+			<GroupButtons setError={setError} setOpen={setOpen} />
 
 			<Snackbar
 				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
