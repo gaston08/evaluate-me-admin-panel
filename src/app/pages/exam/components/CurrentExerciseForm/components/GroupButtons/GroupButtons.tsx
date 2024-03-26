@@ -3,8 +3,11 @@ import { useContext } from 'react';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import { ExamContext } from 'app/contexts/Exam';
 import { examType, createExam } from 'app/shared/interfaces/exam';
+import { exerciseType } from 'app/shared/interfaces/exercise';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 
 export default function GroupButtons({
 	setError,
@@ -29,6 +32,9 @@ export default function GroupButtons({
 		} else if (!checkCorrectOptions()) {
 			setError('Añade al menos una respuesta correcta para cada ejercicio.');
 			setOpen(true);
+		} else if (currentExercise.pts === '' || isNaN(currentExercise.pts)) {
+			setError('Añade los puntos del ejercicio.');
+			setOpen(true);
 		} else {
 			setExam((prev: examType) => {
 				return {
@@ -47,6 +53,7 @@ export default function GroupButtons({
 			correctOptions: [],
 			options: [[]],
 			argument: '',
+			pts: '',
 		});
 	};
 
@@ -94,8 +101,25 @@ export default function GroupButtons({
 		}
 	};
 
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setCurrentExercise((prev: exerciseType) => {
+			return {
+				...prev,
+				pts: e.target.value,
+			};
+		});
+	};
+
 	return (
 		<Box sx={{ mt: 3 }}>
+			<Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+				<TextField
+					sx={{ width: '30%', mr: 2 }}
+					value={currentExercise.pts}
+					onChange={handleChange}
+				/>
+				<Typography>Pts</Typography>
+			</Box>
 			<Button color="secondary" variant="contained" onClick={addToExam}>
 				Crear Ejercicio
 			</Button>

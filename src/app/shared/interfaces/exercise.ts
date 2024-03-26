@@ -12,6 +12,7 @@ export interface exerciseType {
 	options: Array<Array<optionType>>;
 	correctOptions: Array<string>;
 	argument: string;
+	pts: string;
 }
 
 export interface contextExercises {

@@ -12,6 +12,7 @@ export const defaultCurrentExercise = {
 	question: ['<p>titulo 1</p>', '<p>titulo 2</p>'],
 	correctOptions: [],
 	argument: '',
+	pts: '',
 	options: [
 		[
 			{ id: 1, title: 'hola', feedback: 'DEFAULT FEEDBACK' },
