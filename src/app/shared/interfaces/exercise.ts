@@ -10,7 +10,7 @@ export interface exerciseType {
 	id: string;
 	question: Array<string>;
 	options: Array<Array<optionType>>;
-	correctOptions: Array<string>;
+	correctOptions: Array<Array<string>>;
 	argument: string;
 	pts: string;
 }

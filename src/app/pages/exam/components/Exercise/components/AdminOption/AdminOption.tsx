@@ -16,7 +16,9 @@ export default function AdminOption(props: OptionProps) {
 		<ListItemButton
 			sx={{
 				'&, &:hover, &.Mui-selected, &.Mui-selected:hover': {
-					backgroundColor: exercise.correctOptions.includes(option.id)
+					backgroundColor: exercise.correctOptions.some((arr) =>
+						arr.includes(option.id),
+					)
 						? theme.palette.primary.light
 						: '',
 				},

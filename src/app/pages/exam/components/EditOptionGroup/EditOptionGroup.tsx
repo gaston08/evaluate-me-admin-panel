@@ -33,9 +33,12 @@ export default function EditOptionGroup(props: EditOptionGroupProps) {
 					return obj.id !== id;
 				});
 			});
-			const newCorrectOptions: Array<string> = prev.correctOptions.filter(
-				(prevOpt) => prevOpt !== id,
+			const newCorrectOptions: Array<string> = prev.correctOptions.map(
+				(arr) => {
+					return arr.filter((prevOpt) => prevOpt !== id);
+				},
 			);
+
 			return {
 				...prev,
 				options: newOptions,
@@ -46,22 +49,38 @@ export default function EditOptionGroup(props: EditOptionGroupProps) {
 
 	const toggleCorrectOption = () => {
 		setCurrentExercise((prev: exerciseType): exerciseType => {
-			if (prev.correctOptions.includes(id)) {
-				// delete option
-				const newCorrectOptions: Array<string> = prev.correctOptions.filter(
-					(prevOpt) => prevOpt !== id,
-				);
-				return {
-					...prev,
-					correctOptions: newCorrectOptions,
-				};
-			} else {
-				// add option
-				return {
-					...prev,
-					correctOptions: [...prev.correctOptions, id],
-				};
+			console.log('A');
+			const newCorrectOptions = Array.from(
+				{ length: prev.options.length },
+				() => [],
+			);
+			console.log('B');
+			for (let i = 0; i < prev.options.length; i++) {
+				for (let j = 0; j < prev.options[i].length; j++) {
+					if (prev.options[i][j].id === id) {
+						if (prev.correctOptions[i]) {
+							if (prev.correctOptions[i].includes(id)) {
+								newCorrectOptions[i] = newCorrectOptions[i].filter(
+									(opt) => opt !== id,
+								);
+							} else {
+								newCorrectOptions[i].push(id);
+							}
+						} else {
+							newCorrectOptions[i].push(id);
+						}
+					} else if (prev.correctOptions[i]) {
+						if (prev.correctOptions[i][j]) {
+							newCorrectOptions[i].push(prev.correctOptions[i][j]);
+						}
+					}
+				}
 			}
+
+			return {
+				...prev,
+				correctOptions: newCorrectOptions,
+			};
 		});
 	};
 

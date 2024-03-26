@@ -18,6 +18,7 @@ export default function GroupButtons({
 }) {
 	const { setExam } = React.useContext<createExam>(ExamContext);
 	const { setCurrentExercise, currentExercise } = useContext(ExerciseContext);
+	console.log(currentExercise.correctOptions);
 	const addToExam = () => {
 		if (
 			currentExercise.question[currentExercise.question.length - 1].length < 10
@@ -58,24 +59,18 @@ export default function GroupButtons({
 	};
 
 	const checkCorrectOptions = (): boolean => {
-		let aux: number = 0;
-		let hasCorrectOptions: boolean;
+		if (
+			currentExercise.correctOptions.length !== currentExercise.options.length
+		)
+			return false;
 
-		for (let j = 0; j < currentExercise.options.length; j++) {
-			hasCorrectOptions = false;
-			for (let i = 0; i < currentExercise.options[j].length; i++) {
-				hasCorrectOptions = currentExercise.correctOptions.includes(
-					currentExercise.options[j][i].id,
-				);
-
-				if (hasCorrectOptions) {
-					i = currentExercise.options[j].length;
-					aux += 1;
-				}
+		for (let i = 0; i < currentExercise.correctOptions.length; i++) {
+			if (currentExercise.correctOptions[i].length === 0) {
+				return false;
 			}
 		}
 
-		return aux === currentExercise.options.length ? true : false;
+		return true;
 	};
 
 	const addExercise = () => {
