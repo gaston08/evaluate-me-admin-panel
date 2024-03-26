@@ -14,12 +14,12 @@ export const defaultCurrentExercise = {
 	argument: '',
 	options: [
 		[
-			{ id: 1, title: 'hola' },
-			{ id: 2, title: 'option 2' },
+			{ id: 1, title: 'hola', feedback: 'DEFAULT FEEDBACK' },
+			{ id: 2, title: 'option 2', feedback: '' },
 		],
 		[
-			{ id: 3, title: 'opt' },
-			{ id: 4, title: 'lastoption' },
+			{ id: 3, title: 'opt', feedback: '' },
+			{ id: 4, title: 'lastoption', feedback: '' },
 		],
 	],
 };

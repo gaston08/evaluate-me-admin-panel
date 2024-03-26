@@ -3,6 +3,7 @@ import React from 'react';
 export interface optionType {
 	id: string;
 	title: string;
+	feedback: string;
 }
 
 export interface exerciseType {
