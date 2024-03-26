@@ -1,5 +1,5 @@
-import { Outlet } from 'react-router-dom';
-/*import { useState, useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { axiosPost } from 'app/utils/axios';
 import {
 	cleanStorage,
@@ -8,10 +8,10 @@ import {
 	isTokenExpired,
 	setToken,
 } from 'app/utils/common';
-import axios from 'axios';*/
+import axios from 'axios';
 
 export default function RequireAuth() {
-	/*const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 	const navigate = useNavigate();
 
 	const checkAuth = async () => {
@@ -43,9 +43,9 @@ export default function RequireAuth() {
 
 	useEffect(() => {
 		checkAuth().catch(console.error);
-	}, []);*/
+	}, []);
 
-	//return <>{isLoading ? <h1>Loading...</h1> : <Outlet />}</>;
+	return <>{isLoading ? <h1>Loading...</h1> : <Outlet />}</>;
 	return (
 		<>
 			<Outlet />
