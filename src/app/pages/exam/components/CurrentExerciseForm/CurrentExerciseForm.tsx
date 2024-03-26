@@ -32,6 +32,7 @@ export default function CurrentExerciseForm() {
 			optArr[optArr.length - 1].push({
 				id: window.self.crypto.randomUUID(),
 				title: replacedOption,
+				feedback: '',
 			});
 			return {
 				...prev,
