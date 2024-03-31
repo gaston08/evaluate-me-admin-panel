@@ -6,11 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import {
-  faMagnifyingGlass,
-  faTrash,
-  faFilter,
-} from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function UserTableToolbar({
@@ -58,13 +54,7 @@ export default function UserTableToolbar({
             <FontAwesomeIcon icon={faTrash} />
           </IconButton>
         </Tooltip>
-      ) : (
-        <Tooltip title="Filtrar">
-          <IconButton>
-            <FontAwesomeIcon icon={faFilter} />
-          </IconButton>
-        </Tooltip>
-      )}
+      ) : null}
     </Toolbar>
   );
 }
