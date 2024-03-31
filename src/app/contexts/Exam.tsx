@@ -13,4 +13,5 @@ export const defaultCurrentExam = {
 	exercises: [],
 	type: '',
 	exam_number: '',
+	totalPts: 0,
 };

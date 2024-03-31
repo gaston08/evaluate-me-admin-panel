@@ -18,7 +18,7 @@ export default function GroupButtons({
 }) {
 	const { setExam } = React.useContext<createExam>(ExamContext);
 	const { setCurrentExercise, currentExercise } = useContext(ExerciseContext);
-	console.log(currentExercise.correctOptions);
+
 	const addToExam = () => {
 		if (
 			currentExercise.question[currentExercise.question.length - 1].length < 10
@@ -41,6 +41,7 @@ export default function GroupButtons({
 				return {
 					...prev,
 					exercises: [...prev.exercises, currentExercise],
+					totalPts: prev.totalPts + Number(currentExercise.pts),
 				};
 			});
 			resetExercise();
