@@ -2,6 +2,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { axiosPost } from 'app/utils/axios';
 import axios from 'axios';
+import { decodeToken } from 'react-jwt';
 
 export default function RequireAuthAdmin() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -20,8 +21,14 @@ export default function RequireAuthAdmin() {
 		const result = await axiosPost('api/refresh-token', {});
 
 		if (result.ok) {
-			localStorage.setItem('access_token', result.data.token);
-			setIsLoading(false);
+			const user = decodeToken(result.data.token);
+			if (user.role === 'admin') {
+				localStorage.setItem('access_token', result.data.token);
+				setIsLoading(false);
+			} else {
+				localStorage.removeItem('access_token');
+				navigate('/auth/login');
+			}
 		} else {
 			localStorage.removeItem('access_token');
 			navigate('/auth/login');
