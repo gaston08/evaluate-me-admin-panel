@@ -4,7 +4,7 @@ import { Create } from 'app/pages/exam';
 import { SignIn } from 'app/pages/auth';
 import Users from 'app/pages/admin/Users';
 
-import { RequireAuth, NoRequireAuth } from 'app/layouts/auth';
+import { RequireAuthAdmin, NoRequireAuth } from 'app/layouts/auth';
 import { AdminLayout } from 'app/layouts/admin';
 
 export const arrRoutes = [
@@ -14,7 +14,7 @@ export const arrRoutes = [
   },
   {
     path: '/admin',
-    element: <RequireAuth />,
+    element: <RequireAuthAdmin />,
     children: [
       {
         path: '/admin',
@@ -31,7 +31,7 @@ export const arrRoutes = [
   {
     path: '/temp/',
     errorElement: <Error />,
-    element: <RequireAuth />,
+    element: <RequireAuthAdmin />,
     children: [
       {
         path: '/temp/exam/create',

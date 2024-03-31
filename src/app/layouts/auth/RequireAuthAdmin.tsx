@@ -1,29 +1,17 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { axiosPost } from 'app/utils/axios';
-import {
-	cleanStorage,
-	getExpireTime,
-	enumTime,
-	isTokenExpired,
-	setToken,
-} from 'app/utils/common';
 import axios from 'axios';
 
-export default function RequireAuth() {
+export default function RequireAuthAdmin() {
 	const [isLoading, setIsLoading] = useState(true);
 	const navigate = useNavigate();
 
 	const checkAuth = async () => {
-		const access_token_expires_in: number = Number(
-			localStorage.getItem('access_token_expires_in'),
-		);
 		const access_token: string = localStorage.getItem('access_token');
 
-		const is_token_expired = isTokenExpired(access_token_expires_in);
-
-		if (!access_token | is_token_expired) {
-			cleanStorage();
+		if (!access_token) {
+			localStorage.removeItem('access_token');
 			navigate('/auth/login');
 			return;
 		}
@@ -32,11 +20,10 @@ export default function RequireAuth() {
 		const result = await axiosPost('api/refresh-token', {});
 
 		if (result.ok) {
-			const expire_time = getExpireTime(1, enumTime.HOUR);
-			setToken(result.data.token, expire_time);
+			localStorage.setItem('access_token', result.data.token);
 			setIsLoading(false);
 		} else {
-			cleanStorage();
+			localStorage.removeItem('access_token');
 			navigate('/auth/login');
 		}
 	};

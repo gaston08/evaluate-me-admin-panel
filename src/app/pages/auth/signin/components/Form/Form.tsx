@@ -14,7 +14,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Alert from '@mui/material/Alert';
 import { axiosPost } from 'app/utils/axios';
-import { getExpireTime, enumTime, setToken } from 'app/utils/common';
 import {
 	apiPostResponse,
 	expressError,
@@ -30,7 +29,6 @@ export default function Form() {
 			initialValues={{
 				email: 'gaston08pedraza@gmail.com',
 				password: 'abcd1234',
-				rememberLogin: true,
 			}}
 			validate={(values) => {
 				const errors = {};
@@ -59,13 +57,7 @@ export default function Form() {
 
 				const result: apiPostResponse = await axiosPost('api/login', data);
 				if (result.ok) {
-					let access_token_expires_in: number;
-					if (values.rememberLogin) {
-						access_token_expires_in = getExpireTime(7, enumTime.DAY);
-					} else {
-						access_token_expires_in = getExpireTime(5, enumTime.HOUR);
-					}
-					setToken(result.data.token, access_token_expires_in);
+					localStorage.setItem('access_token', result.data.token);
 					navigate('/admin/users');
 				} else {
 					setError(result.error);

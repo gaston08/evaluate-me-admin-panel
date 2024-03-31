@@ -8,7 +8,6 @@ import { alpha } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import { cleanStorage } from 'app/utils/common';
 
 const account = {
   displayName: 'Jaydon Frankie',
@@ -44,7 +43,7 @@ export default function AccountPopover() {
   };
 
   const logout = () => {
-    cleanStorage();
+    localStorage.removeItem('access_token');
     navigate('/auth/login');
   };
 
