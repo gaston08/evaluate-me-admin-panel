@@ -33,13 +33,13 @@ export default function UserTableToolbar({
     >
       {numSelected > 0 ? (
         <Typography component="div" variant="subtitle1">
-          {numSelected} selected
+          {numSelected} Seleccionados
         </Typography>
       ) : (
         <OutlinedInput
           value={filterName}
           onChange={onFilterName}
-          placeholder="Search user..."
+          placeholder="Buscar usuario..."
           startAdornment={
             <InputAdornment position="start">
               <FontAwesomeIcon icon={faMagnifyingGlass} />

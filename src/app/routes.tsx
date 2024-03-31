@@ -3,6 +3,7 @@ import Error from 'app/pages/error';
 import { Create } from 'app/pages/exam';
 import { SignIn } from 'app/pages/auth';
 import Users from 'app/pages/admin/Users';
+import CreateUser from 'app/pages/admin/CreateUser';
 
 import { RequireAuthAdmin, NoRequireAuth } from 'app/layouts/auth';
 import { AdminLayout } from 'app/layouts/admin';
@@ -23,6 +24,10 @@ export const arrRoutes = [
           {
             path: '/admin/users',
             element: <Users />,
+          },
+          {
+            path: '/admin/users/create',
+            element: <CreateUser />,
           },
         ],
       },

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
@@ -9,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Scrollbar from 'app/components/ScrollBar';
@@ -142,9 +143,11 @@ export default function UsersPage() {
 				<Button
 					variant="contained"
 					color="inherit"
-					startIcon={<FontAwesomeIcon icon={faMagnifyingGlass} />}
+					startIcon={<FontAwesomeIcon icon={faUserPlus} />}
+					component={RouterLink}
+					to="/admin/users/create"
 				>
-					New User
+					Crear usuario
 				</Button>
 			</Stack>
 
