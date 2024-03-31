@@ -77,7 +77,7 @@ export default function UsersPage() {
 
 	const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.checked) {
-			const newSelecteds = users.map((n) => n.name);
+			const newSelecteds = users.map((n) => n._id);
 			setSelected(newSelecteds);
 			return;
 		}
@@ -180,9 +180,9 @@ export default function UsersPage() {
 										<UserTableRow
 											user={row}
 											key={row._id}
-											selected={selected.includes(row.name)}
+											selected={selected.includes(row._id)}
 											handleClick={(event: React.MouseEvent<HTMLElement>) => {
-												handleClick(event, row.name);
+												handleClick(event, row._id);
 											}}
 										/>
 									))}
