@@ -120,7 +120,7 @@ export default function EditOptionGroup(props: EditOptionGroupProps) {
 	};
 
 	return (
-		<>
+		<Box sx={{ width: 220 }}>
 			<div>
 				<IconButton onClick={handleOpenModal}>
 					<FontAwesomeIcon
@@ -148,6 +148,6 @@ export default function EditOptionGroup(props: EditOptionGroupProps) {
 					</Box>
 				</Dialog>
 			</>
-		</>
+		</Box>
 	);
 }
