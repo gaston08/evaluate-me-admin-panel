@@ -37,11 +37,17 @@ export default function GroupButtons({
 			setError('Añade los puntos del ejercicio.');
 			setOpen(true);
 		} else {
+			const argument = `<p>${currentExercise.argument.replaceAll(
+				/\n/g,
+				'<br>',
+			)}</p>`;
+
 			setExam((prev: examType) => {
 				return {
 					...prev,
-					exercises: [...prev.exercises, currentExercise],
+					exercises: [...prev.exercises, { ...currentExercise, argument }],
 					totalPts: prev.totalPts + Number(currentExercise.pts),
+					argument,
 				};
 			});
 			resetExercise();
