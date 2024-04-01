@@ -47,7 +47,6 @@ export default function GroupButtons({
 					...prev,
 					exercises: [...prev.exercises, { ...currentExercise, argument }],
 					totalPts: prev.totalPts + Number(currentExercise.pts),
-					argument,
 				};
 			});
 			resetExercise();

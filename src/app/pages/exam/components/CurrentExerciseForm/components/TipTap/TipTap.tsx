@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { memo, useContext, useEffect } from 'react';
 import { Color } from '@tiptap/extension-color';
 import ListItem from '@tiptap/extension-list-item';
 import TextStyle from '@tiptap/extension-text-style';
@@ -24,7 +24,7 @@ const extensions = [
 	}),
 ];
 
-export default function TipTap() {
+const memoTipTap = memo(function TipTap() {
 	console.log('tiptap');
 	const { setCurrentExercise, currentExercise } = useContext(ExerciseContext);
 
@@ -59,4 +59,6 @@ export default function TipTap() {
 			<EditorContent editor={editor} />
 		</div>
 	);
-}
+});
+
+export default memoTipTap;
