@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
 import { ExercisesContext } from './contexts/Exercises';
@@ -21,6 +21,20 @@ export default function App() {
   });
 
   const [exam, setExam] = useState<contextExam>(defaultCurrentExam);
+
+  useEffect(() => {
+    const onBeforeUnload = (ev) => {
+      // eslint-disable-next-line
+      ev.returnValue = 'Estás por salir del sitio.';
+      return 'Estás por salir del sitio.';
+    };
+
+    window.addEventListener('beforeunload', onBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', onBeforeUnload);
+    };
+  }, []);
 
   return (
     <AuthContext.Provider
