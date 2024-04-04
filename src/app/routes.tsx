@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Error from 'app/pages/error';
-import { Create } from 'app/pages/exam';
+import { Create, Update } from 'app/pages/exam';
 import { SignIn } from 'app/pages/auth';
 import Users from 'app/pages/admin/Users';
 import CreateUser from 'app/pages/admin/CreateUser';
@@ -41,6 +41,10 @@ export const arrRoutes = [
       {
         path: '/temp/exam/create',
         element: <Create />,
+      },
+      {
+        path: '/temp/exam/update/:id',
+        element: <Update />,
       },
     ],
   },

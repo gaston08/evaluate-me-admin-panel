@@ -40,3 +40,9 @@ export interface apiGetAllUsersResponse extends apiGetResponse {
 		}>;
 	};
 }
+
+export interface apiGetExamResponse extends apiGetResponse {
+	data: {
+		exam: examType;
+	};
+}

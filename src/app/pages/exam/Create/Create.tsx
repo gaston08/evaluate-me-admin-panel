@@ -5,7 +5,7 @@ import Exercises from 'app/pages/exam/components/Exercises';
 import ExamForm from 'app/pages/exam/components/ExamForm';
 import PreviewExercise from 'app/pages/exam/components/PreviewExercise';
 
-import './create.scss';
+import '../exam-form.scss';
 
 export default function Create() {
 	return (
