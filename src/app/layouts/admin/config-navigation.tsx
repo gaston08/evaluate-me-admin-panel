@@ -17,7 +17,7 @@ interface navConfig {
 const navConfig: Array<navConfig> = [
   {
     title: 'dashboard',
-    path: '/admin/',
+    path: '/admin/dashboard',
     icon: icon('ic_analytics'),
   },
   {
