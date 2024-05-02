@@ -58,7 +58,7 @@ export default function Form() {
 				const result: apiPostResponse = await axiosPost('api/login', data);
 				if (result.ok) {
 					localStorage.setItem('access_token', result.data.token);
-					navigate('/admin/users');
+					navigate('/admin/dashboard');
 				} else {
 					setError(result.error);
 					if (result.errors) {

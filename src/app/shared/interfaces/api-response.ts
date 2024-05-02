@@ -46,3 +46,18 @@ export interface apiGetExamResponse extends apiGetResponse {
 		exam: examType;
 	};
 }
+
+export interface apiGetDashboardInfo extends apiGetResponse {
+	data: {
+		dashboard: {
+			users: Array<{
+				_id: string;
+				count: number;
+			}>;
+			results: Array<{
+				_id: string;
+				count: number;
+			}>;
+		};
+	};
+}
