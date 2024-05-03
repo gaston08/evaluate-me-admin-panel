@@ -1,20 +1,25 @@
-import { useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ExercisesContext } from 'app/contexts/Exercises';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import Grid from '@mui/material/Grid';
 import CurrentExerciseForm from 'app/pages/exam/components/CurrentExerciseForm';
+import GroupButtons from 'app/pages/exam/components/CurrentExerciseForm/components/GroupButtons';
 import CreateExamButton from 'app/pages/exam/components/CreateExamButton';
 import Exercises from 'app/pages/exam/components/Exercises';
 import ExamForm from 'app/pages/exam/components/ExamForm';
 import LoadExercisesJs from 'app/pages/exam/components/LoadExercisesJs';
 import PreviewExercise from 'app/pages/exam/components/PreviewExercise';
 import { contextExercises } from 'app/shared/interfaces/exercise';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 import '../exam-form.scss';
 
 export default function Create() {
 	const { exercises } = useContext<contextExercises>(ExercisesContext);
 	const { setCurrentExercise } = useContext(ExerciseContext);
+	const [open, setOpen] = useState<boolean>(false);
+	const [error, setError] = useState<string>('');
 
 	useEffect(() => {
 		if (exercises.length !== 0) {
@@ -43,6 +48,10 @@ export default function Create() {
 		}
 	}, [exercises]);
 
+	const handleClose = () => {
+		setOpen(false);
+	};
+
 	return (
 		<div className="tiptapAppCreateExam">
 			<Grid container spacing={1}>
@@ -53,6 +62,7 @@ export default function Create() {
 					<CreateExamButton />
 				</Grid>
 				<Grid item xs={12} md={8} lg={8} className="gridRight">
+					<GroupButtons setError={setError} setOpen={setOpen} />
 					<div className="previewContainer">
 						<PreviewExercise />
 					</div>
@@ -60,6 +70,16 @@ export default function Create() {
 					<Exercises />
 				</Grid>
 			</Grid>
+			<Snackbar
+				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+				open={open}
+				autoHideDuration={5000}
+				onClose={handleClose}
+			>
+				<Alert variant="filled" severity="error">
+					{error}
+				</Alert>
+			</Snackbar>
 		</div>
 	);
 }

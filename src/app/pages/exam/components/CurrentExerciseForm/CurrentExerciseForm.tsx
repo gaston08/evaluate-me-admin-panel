@@ -4,20 +4,15 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import TipTap from './components/TipTap';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import { exerciseType } from 'app/shared/interfaces/exercise';
 
 import ArgumentGeneral from './components/ArgumentGeneral';
-import GroupButtons from './components/GroupButtons';
 
 export default function CurrentExerciseForm() {
 	const { setCurrentExercise } = useContext(ExerciseContext);
 	const [option, setOption] = useState<string>('');
-	const [open, setOpen] = useState<boolean>(false);
-	const [error, setError] = useState<string>('');
 
 	const handleOption = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setOption(e.target.value);
@@ -42,10 +37,6 @@ export default function CurrentExerciseForm() {
 		setOption('');
 	};
 
-	const handleClose = () => {
-		setOpen(false);
-	};
-
 	return (
 		<Box sx={{ pl: 1 }}>
 			<TipTap />
@@ -66,18 +57,6 @@ export default function CurrentExerciseForm() {
 				<Typography>Argumento</Typography>
 				<ArgumentGeneral />
 			</Box>
-			<GroupButtons setError={setError} setOpen={setOpen} />
-
-			<Snackbar
-				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-				open={open}
-				autoHideDuration={5000}
-				onClose={handleClose}
-			>
-				<Alert variant="filled" severity="error">
-					{error}
-				</Alert>
-			</Snackbar>
 		</Box>
 	);
 }

@@ -7,7 +7,6 @@ import { examType, createExam } from 'app/shared/interfaces/exam';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { contextExercises, exerciseType } from 'app/shared/interfaces/exercise';
 
 export default function GroupButtons({
@@ -121,34 +120,24 @@ export default function GroupButtons({
 	};
 
 	return (
-		<Box sx={{ mt: 3 }}>
-			<Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+		<Box sx={{ mt: 1 }}>
+			<Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1, mb: 2 }}>
 				<TextField
-					sx={{ width: '30%', mr: 2 }}
+					sx={{ width: 120 }}
 					value={currentExercise.pts}
 					onChange={handleChange}
+					placeholder="Pts"
 				/>
-				<Typography>Pts</Typography>
+				<Button color="secondary" variant="contained" onClick={addToExam}>
+					Crear
+				</Button>
+				<Button color="secondary" variant="outlined" onClick={addExercise}>
+					Agregar
+				</Button>
+				<Button color="error" variant="contained" onClick={resetExercise}>
+					Vaciar
+				</Button>
 			</Box>
-			<Button color="secondary" variant="contained" onClick={addToExam}>
-				Crear Ejercicio
-			</Button>
-			<Button
-				sx={{ ml: 1 }}
-				color="secondary"
-				variant="outlined"
-				onClick={addExercise}
-			>
-				Agregar Ejercicio
-			</Button>
-			<Button
-				sx={{ mt: 2 }}
-				color="error"
-				variant="contained"
-				onClick={resetExercise}
-			>
-				Vaciar Ejercicio
-			</Button>
 		</Box>
 	);
 }
