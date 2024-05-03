@@ -42,8 +42,8 @@ export const years = [
 ];
 
 export const exam_types = [
-	'1er Parcial (Cátedra: PEDROSA, Fernando).',
-	'2do Parcial (Cátedra: PEDROSA, Fernando).',
+	'1er Parcial (Cátedra: PEDROSA, Fernando)',
+	'2do Parcial (Cátedra: PEDROSA, Fernando)',
 ];
 
 export const exam_numbers = [
