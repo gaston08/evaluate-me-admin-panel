@@ -4,7 +4,6 @@ import { ExerciseContext } from 'app/contexts/Exercise';
 import { ExamContext } from 'app/contexts/Exam';
 import { ExercisesContext } from 'app/contexts/Exercises';
 import { examType, createExam } from 'app/shared/interfaces/exam';
-import { exerciseType } from 'app/shared/interfaces/exercise';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
