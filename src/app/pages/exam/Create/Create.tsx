@@ -45,6 +45,15 @@ export default function Create() {
 				argument: '',
 				pts: exercises[0].points as string,
 			});
+		} else {
+			setCurrentExercise({
+				id: window.self.crypto.randomUUID(),
+				question: ['<p></p>'],
+				correctOptions: [],
+				options: [[]],
+				argument: '',
+				pts: '',
+			});
 		}
 	}, [exercises]);
 
