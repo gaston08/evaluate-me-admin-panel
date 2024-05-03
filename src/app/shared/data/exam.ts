@@ -42,32 +42,8 @@ export const years = [
 ];
 
 export const exam_types = [
-	'Parcial A',
-	'Parcial B',
-	'Parcial C',
-	'Parcial D',
-	'Parcial E',
-	'Parcial F',
-	'Parcial G',
-	'Parcial H',
-	'Parcial I',
-	'Parcial J',
-	'Parcial K',
-	'Parcial L',
-	'Parcial M',
-	'Parcial N',
-	'Parcial 0',
-	'Parcial P',
-	'Parcial Q',
-	'Parcial R',
-	'Parcial S',
-	'Parcial T',
-	'Parcial U',
-	'Parcial V',
-	'Parcial W',
-	'Parcial X',
-	'Parcial Y',
-	'Parcial Z',
+	'1er Parcial (Cátedra: PEDROSA, Fernando).',
+	'2do Parcial (Cátedra: PEDROSA, Fernando).',
 ];
 
 export const exam_numbers = [
