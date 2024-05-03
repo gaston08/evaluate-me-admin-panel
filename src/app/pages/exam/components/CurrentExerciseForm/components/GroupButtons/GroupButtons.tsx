@@ -2,12 +2,14 @@ import * as React from 'react';
 import { useContext } from 'react';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import { ExamContext } from 'app/contexts/Exam';
+import { ExercisesContext } from 'app/contexts/Exercises';
 import { examType, createExam } from 'app/shared/interfaces/exam';
 import { exerciseType } from 'app/shared/interfaces/exercise';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { contextExercises, exerciseType } from 'app/shared/interfaces/exercise';
 
 export default function GroupButtons({
 	setError,
@@ -18,6 +20,8 @@ export default function GroupButtons({
 }) {
 	const { setExam } = React.useContext<createExam>(ExamContext);
 	const { setCurrentExercise, currentExercise } = useContext(ExerciseContext);
+	const { exercises, setExercises } =
+		useContext<contextExercises>(ExercisesContext);
 
 	const addToExam = () => {
 		if (
@@ -49,7 +53,13 @@ export default function GroupButtons({
 					totalPts: prev.totalPts + Number(currentExercise.pts),
 				};
 			});
-			resetExercise();
+			if (exercises.length !== 0) {
+				setExercises((prev: Array<exerciseType>) => {
+					return prev.slice(1);
+				});
+			} else {
+				resetExercise();
+			}
 		}
 	};
 
