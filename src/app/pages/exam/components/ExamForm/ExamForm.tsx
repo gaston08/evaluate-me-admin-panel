@@ -15,7 +15,7 @@ import {
   years,
   exam_types,
   exam_numbers,
-} from 'app/shared/data/exam';
+} from 'app/shared/exams/exam';
 
 export default function ExamForm() {
   const { setExam, exam } = React.useContext<createExam>(ExamContext);
@@ -109,8 +109,8 @@ export default function ExamForm() {
             >
               {exam_types.map((exam_type) => {
                 return (
-                  <MenuItem key={exam_type} value={exam_type}>
-                    {exam_type}
+                  <MenuItem key={exam_type.value} value={exam_type.value}>
+                    {exam_type.label}
                   </MenuItem>
                 );
               })}
