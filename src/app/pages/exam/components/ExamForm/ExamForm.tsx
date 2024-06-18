@@ -11,11 +11,13 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import { ExamContext } from 'app/contexts/Exam';
 import { createExam, examType } from 'app/shared/interfaces/exam';
 import {
-  subjects,
   years,
   exam_types,
   exam_numbers,
+  departments,
 } from 'app/shared/exams/exam';
+
+import { subjects } from 'app/shared/exams/ubaxxi';
 
 export default function ExamForm() {
   const { setExam, exam } = React.useContext<createExam>(ExamContext);
@@ -43,6 +45,15 @@ export default function ExamForm() {
       return {
         ...prev,
         type: e.target.value,
+      };
+    });
+  };
+
+  const setDepartment = (e: SelectChangeEvent) => {
+    setExam((prev: examType) => {
+      return {
+        ...prev,
+        department: e.target.value,
       };
     });
   };
@@ -111,6 +122,24 @@ export default function ExamForm() {
                 return (
                   <MenuItem key={exam_type.value} value={exam_type.value}>
                     {exam_type.label}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth sx={{ mt: 1 }}>
+            <InputLabel id="department">Cátedra</InputLabel>
+            <Select
+              labelId="department"
+              label="Cátedra"
+              onChange={setDepartment}
+              value={exam.department}
+            >
+              {departments.map((department) => {
+                return (
+                  <MenuItem key={department.value} value={department.value}>
+                    {department.label}
                   </MenuItem>
                 );
               })}

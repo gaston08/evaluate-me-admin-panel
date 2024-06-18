@@ -9,6 +9,7 @@ import {
 let API_ROUTE: string;
 
 if (import.meta.env.MODE === 'development') {
+	console.log('working on development mode');
 	API_ROUTE = import.meta.env.VITE_API_ROUTE_DEV as string;
 } else {
 	API_ROUTE = import.meta.env.VITE_API_ROUTE as string;

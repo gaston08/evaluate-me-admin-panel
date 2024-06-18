@@ -13,6 +13,7 @@ export interface examType {
 	subject: string;
 	exercises: exerciseType[];
 	totalPts: number;
+	department: string;
 }
 
 export interface createExam {

@@ -42,7 +42,7 @@ export default function Create() {
 				question,
 				correctOptions: [],
 				options,
-				argument: '',
+				argument: exercises[0].argument,
 				pts: exercises[0].points as string,
 			});
 		} else {
