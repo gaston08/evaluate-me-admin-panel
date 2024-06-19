@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -10,19 +10,27 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 
 import { ExamContext } from 'app/contexts/Exam';
 import { createExam, examType } from 'app/shared/interfaces/exam';
-import {
-  years,
-  exam_types,
-  exam_numbers,
-  departments,
-} from 'app/shared/exams/exam';
+import { years, exam_types, exam_numbers } from 'app/shared/exams/exam';
 
-import { subjects } from 'app/shared/exams/ubaxxi';
+import {
+  subjects,
+  departmentInterface,
+  selectInterface,
+} from 'app/shared/exams/ubaxxi';
 
 export default function ExamForm() {
-  const { setExam, exam } = React.useContext<createExam>(ExamContext);
+  const { setExam, exam } = useContext<createExam>(ExamContext);
+  const [departments, setDepartments] = useState<Array<departmentInterface>>(
+    [],
+  );
 
   const setSubject = (e: SelectChangeEvent) => {
+    setDepartments(() => {
+      const subject: selectInterface = subjects.find(
+        (subject) => subject.value === e.target.value,
+      );
+      return subject.departments;
+    });
     setExam((prev: examType) => {
       return {
         ...prev,
@@ -135,6 +143,7 @@ export default function ExamForm() {
               label="Cátedra"
               onChange={setDepartment}
               value={exam.department}
+              disabled={exam.subject === ''}
             >
               {departments.map((department) => {
                 return (
