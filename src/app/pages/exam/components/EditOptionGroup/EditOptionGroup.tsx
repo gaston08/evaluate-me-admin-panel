@@ -49,12 +49,10 @@ export default function EditOptionGroup(props: EditOptionGroupProps) {
 
 	const toggleCorrectOption = () => {
 		setCurrentExercise((prev: exerciseType): exerciseType => {
-			console.log('A');
 			const newCorrectOptions = Array.from(
 				{ length: prev.options.length },
 				() => [],
 			);
-			console.log('B');
 			for (let i = 0; i < prev.options.length; i++) {
 				for (let j = 0; j < prev.options[i].length; j++) {
 					if (prev.options[i][j].id === id) {

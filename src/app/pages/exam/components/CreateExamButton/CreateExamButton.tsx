@@ -43,6 +43,8 @@ export default function CreateExamButton() {
 
 			const result: apiPostResponse = await axiosPost('api/exam/create', data);
 			if (result.ok) {
+				console.log('CREADO CORRECTAMENTE');
+				console.log(data);
 				setExam(defaultCurrentExam);
 				setLoading(false);
 			} else {

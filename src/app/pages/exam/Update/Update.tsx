@@ -1,8 +1,9 @@
-import { useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import CurrentExerciseForm from 'app/pages/exam/components/CurrentExerciseForm';
 import CreateExamButton from 'app/pages/exam/components/CreateExamButton';
+import GroupButtons from 'app/pages/exam/components/CurrentExerciseForm/components/GroupButtons';
 import Exercises from 'app/pages/exam/components/Exercises';
 import ExamForm from 'app/pages/exam/components/ExamForm';
 import PreviewExercise from 'app/pages/exam/components/PreviewExercise';
@@ -10,12 +11,16 @@ import { apiGetExamResponse } from 'app/shared/interfaces/api-response';
 import { axiosGet } from 'app/utils/axios';
 import { ExamContext } from 'app/contexts/Exam';
 import { createExam } from 'app/shared/interfaces/exam';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 import '../exam-form.scss';
 
 export default function Update() {
 	const { id } = useParams();
 	const { setExam } = useContext<createExam>(ExamContext);
+	const [error, setError] = useState<string>('');
+	const [open, setOpen] = useState<boolean>(false);
 
 	useEffect(() => {
 		async function getExam() {
@@ -38,6 +43,10 @@ export default function Update() {
 		getExam().then().catch(console.error);
 	}, []);
 
+	const handleClose = () => {
+		setOpen(false);
+	};
+
 	return (
 		<div className="tiptapAppCreateExam">
 			<Grid container spacing={1}>
@@ -47,6 +56,7 @@ export default function Update() {
 					<CreateExamButton />
 				</Grid>
 				<Grid item xs={12} md={8} lg={8} className="gridRight">
+					<GroupButtons setError={setError} setOpen={setOpen} />
 					<div className="previewContainer">
 						<PreviewExercise />
 					</div>
@@ -54,6 +64,16 @@ export default function Update() {
 					<Exercises />
 				</Grid>
 			</Grid>
+			<Snackbar
+				anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+				open={open}
+				autoHideDuration={5000}
+				onClose={handleClose}
+			>
+				<Alert variant="filled" severity="error">
+					{error}
+				</Alert>
+			</Snackbar>
 		</div>
 	);
 }

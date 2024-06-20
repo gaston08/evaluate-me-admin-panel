@@ -34,7 +34,7 @@ export default function Create() {
 			});
 
 			const question = exercises[0].question.map((q) => {
-				return `<p><strong>${q}</strong></p>`;
+				return `<p>${q}</p>`;
 			});
 
 			setCurrentExercise({
