@@ -12,6 +12,7 @@ import PreviewExercise from 'app/pages/exam/components/PreviewExercise';
 import { contextExercises } from 'app/shared/interfaces/exercise';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { getRandomInt } from 'app/utils/common';
 
 import '../exam-form.scss';
 
@@ -23,7 +24,7 @@ export default function Create() {
 
 	useEffect(() => {
 		if (exercises.length !== 0) {
-			const options = exercises[0].options.map((opts) => {
+			/*const options = exercises[0].options.map((opts) => {
 				return opts.map((opt) => {
 					return {
 						id: window.self.crypto.randomUUID(),
@@ -34,7 +35,7 @@ export default function Create() {
 			});
 
 			const question = exercises[0].question.map((q) => {
-				return `<p>${q}</p>`;
+				return `<p><strong>${q}</strong></p>`;
 			});
 
 			setCurrentExercise({
@@ -44,14 +45,21 @@ export default function Create() {
 				options,
 				argument: exercises[0].argument,
 				pts: exercises[0].points as string,
-			});
+			});*/
 		} else {
 			setCurrentExercise({
 				id: window.self.crypto.randomUUID(),
 				question: ['<p></p>'],
 				correctOptions: [],
 				options: [[]],
-				argument: '',
+				argument: [
+					{
+						feed: 'oficial',
+						likes: getRandomInt(13, 31),
+						dislikes: getRandomInt(0, 5),
+						text: '',
+					},
+				],
 				pts: '',
 			});
 		}

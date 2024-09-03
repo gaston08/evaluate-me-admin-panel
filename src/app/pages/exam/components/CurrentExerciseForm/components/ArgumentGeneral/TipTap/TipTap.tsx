@@ -32,11 +32,11 @@ const memoTipTap = memo(function TipTap() {
 		content: '<p></p>',
 		onUpdate({ editor }) {
 			setCurrentExercise((prev: exerciseType) => {
-				const newQuestionArr: Array<string> = [...prev.question];
-				newQuestionArr[newQuestionArr.length - 1] = editor.getHTML();
+				const newArgumentArr: Array<string> = [...prev.argument];
+				newArgumentArr[0].text = editor.getHTML();
 				return {
 					...prev,
-					question: newQuestionArr,
+					argument: newArgumentArr,
 				};
 			});
 		},
@@ -45,10 +45,10 @@ const memoTipTap = memo(function TipTap() {
 	useEffect(() => {
 		if (editor !== null) {
 			editor.commands.setContent(
-				currentExercise.question[currentExercise.question.length - 1],
+				currentExercise.argument[currentExercise.argument.length - 1],
 			);
 		}
-	}, [currentExercise.question.length]);
+	}, [currentExercise.argument.length]);
 
 	if (editor === null) return null;
 

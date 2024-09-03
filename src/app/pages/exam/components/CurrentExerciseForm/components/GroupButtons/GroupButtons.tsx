@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { contextExercises, exerciseType } from 'app/shared/interfaces/exercise';
+import { getRandomInt } from 'app/utils/common';
 
 export default function GroupButtons({
 	setError,
@@ -39,15 +40,11 @@ export default function GroupButtons({
 			setError('Añade los puntos del ejercicio.');
 			setOpen(true);
 		} else {
-			const argument = `<p>${currentExercise.argument.replaceAll(
-				/\n/g,
-				'<br>',
-			)}</p>`;
-
 			setExam((prev: examType) => {
+				console.log(currentExercise);
 				return {
 					...prev,
-					exercises: [...prev.exercises, { ...currentExercise, argument }],
+					exercises: [...prev.exercises, { ...currentExercise }],
 					totalPts: prev.totalPts + Number(currentExercise.pts),
 				};
 			});
@@ -67,7 +64,14 @@ export default function GroupButtons({
 			question: ['<p></p>'],
 			correctOptions: [],
 			options: [[]],
-			argument: '',
+			argument: [
+				{
+					feed: 'oficial',
+					likes: getRandomInt(13, 31),
+					dislikes: getRandomInt(0, 5),
+					text: '',
+				},
+			],
 			pts: '',
 		});
 	};
@@ -105,6 +109,7 @@ export default function GroupButtons({
 					question: [...prev.question, '<p></p>'],
 					options: [...prev.options, []],
 				};
+				console.log(newExercise);
 				return newExercise;
 			});
 		}

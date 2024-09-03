@@ -11,10 +11,7 @@ export default function PreviewExercise() {
 			<Box sx={{ mt: 3 }}>
 				<div
 					dangerouslySetInnerHTML={{
-						__html: `<p>${currentExercise.argument.replaceAll(
-							/\n/g,
-							'<br>',
-						)}</p>`,
+						__html: currentExercise.argument[0].text,
 					}}
 				></div>
 			</Box>

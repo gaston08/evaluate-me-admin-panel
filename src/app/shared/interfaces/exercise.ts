@@ -11,8 +11,15 @@ export interface exerciseType {
 	question: Array<string>;
 	options: Array<Array<optionType>>;
 	correctOptions: Array<Array<string>>;
-	argument: string;
+	argument: Array<argumentType>;
 	pts: string;
+}
+
+export interface argumentType {
+	likes: number;
+	dislikes: number;
+	text: string;
+	feed: string;
 }
 
 export interface contextExercises {

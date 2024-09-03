@@ -14,7 +14,7 @@ if (import.meta.env.MODE === 'development') {
 } else {
 	API_ROUTE = import.meta.env.VITE_API_ROUTE as string;
 }
-console.log(API_ROUTE);
+console.log('Api calls ' + API_ROUTE);
 
 interface axiosPostInterface {
 	data?: object;
