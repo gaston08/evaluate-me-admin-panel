@@ -46,6 +46,15 @@ export default function Create() {
 				argument: exercises[0].argument,
 				pts: exercises[0].points as string,
 			});*/
+
+			setCurrentExercise({
+				id: window.self.crypto.randomUUID(),
+				argument: exercises[0].argument,
+				question: exercises[0].question,
+				options: exercises[0].options,
+				correctOptions: exercises[0].correctOptions,
+				pts: exercises[0].pts,
+			});
 		} else {
 			setCurrentExercise({
 				id: window.self.crypto.randomUUID(),
