@@ -24,7 +24,7 @@ export default function RequireAuth() {
 
 		if (result.ok) {
 			localStorage.setItem('access_token', result.data.token);
-			navigate('/admin/dashboard');
+			navigate('/temp/exam/create');
 		} else {
 			localStorage.removeItem('access_token');
 			setIsLoading(false);
