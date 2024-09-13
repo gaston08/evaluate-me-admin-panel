@@ -7,20 +7,11 @@ import Paper from '@mui/material/Paper';
 import Option from './components/Option';
 import AdminOption from 'app/pages/exam/components/Exercise/components/AdminOption';
 import { exerciseType, optionType } from 'app/shared/interfaces/exercise';
-import katex from 'katex';
-import 'katex/dist/katex.min.css';
 
 interface ExerciseProps {
 	exercise: exerciseType;
 	canSelect: boolean;
 	canEdit: boolean;
-}
-
-function handleReplace(match: string, offset: string) {
-	const html = katex.renderToString(offset, {
-		throwOnError: false,
-	});
-	return html;
 }
 
 export default function Exercise(props: ExerciseProps) {
@@ -32,11 +23,6 @@ export default function Exercise(props: ExerciseProps) {
 	return (
 		<Box sx={{ width: '100%', mb: 4 }}>
 			{Array.from(Array(exercise.question.length), (e, i) => {
-				const render = exercise.question[i].replace(
-					/\${2}([^(\$\$)]+)\${2}/g,
-					handleReplace,
-				);
-
 				return (
 					<Box key={i}>
 						<Paper
@@ -45,7 +31,7 @@ export default function Exercise(props: ExerciseProps) {
 						>
 							<div
 								dangerouslySetInnerHTML={{
-									__html: render,
+									__html: exercise.question[i],
 								}}
 								className="tiptap"
 							></div>
