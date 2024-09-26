@@ -24,7 +24,7 @@ export default function Create() {
 
 	useEffect(() => {
 		if (exercises.length !== 0) {
-			/*const options = exercises[0].options.map((opts) => {
+			const options = exercises[0].options.map((opts) => {
 				return opts.map((opt) => {
 					return {
 						id: window.self.crypto.randomUUID(),
@@ -43,18 +43,25 @@ export default function Create() {
 				question,
 				correctOptions: [],
 				options,
-				argument: exercises[0].argument,
+				argument: [
+					{
+						feed: 'oficial',
+						likes: getRandomInt(20, 135),
+						dislikes: getRandomInt(0, 5),
+						text: '',
+					},
+				],
 				pts: exercises[0].points as string,
-			});*/
+			});
 
-			setCurrentExercise({
+			/*setCurrentExercise({
 				id: window.self.crypto.randomUUID(),
 				argument: exercises[0].argument,
 				question: exercises[0].question,
 				options: exercises[0].options,
 				correctOptions: exercises[0].correctOptions,
 				pts: exercises[0].pts,
-			});
+			});*/
 		} else {
 			setCurrentExercise({
 				id: window.self.crypto.randomUUID(),
