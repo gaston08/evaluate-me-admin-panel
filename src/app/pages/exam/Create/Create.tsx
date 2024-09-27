@@ -51,7 +51,7 @@ export default function Create() {
 						text: '',
 					},
 				],
-				pts: exercises[0].points as string,
+				pts: exercises[0].pts ,
 			});
 
 			/*setCurrentExercise({
