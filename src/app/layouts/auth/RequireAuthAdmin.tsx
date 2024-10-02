@@ -18,7 +18,7 @@ export default function RequireAuthAdmin() {
 		}
 
 		axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-		const result = await axiosPost('api/refresh-token', {});
+		const result = await axiosPost('api/user/refresh-token', {});
 
 		if (result.ok) {
 			const user = decodeToken(result.data.token);

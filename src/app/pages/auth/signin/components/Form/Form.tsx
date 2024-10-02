@@ -55,7 +55,7 @@ export default function Form() {
 					password: values.password,
 				};
 
-				const result: apiPostResponse = await axiosPost('api/login', data);
+				const result: apiPostResponse = await axiosPost('api/user/login', data);
 				if (result.ok) {
 					localStorage.setItem('access_token', result.data.token);
 					navigate('/temp/exam/create');

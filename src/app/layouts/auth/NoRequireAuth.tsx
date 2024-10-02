@@ -20,7 +20,7 @@ export default function RequireAuth() {
 		}
 
 		axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-		const result = await axiosPost('api/refresh-token', {});
+		const result = await axiosPost('api/user/refresh-token', {});
 
 		if (result.ok) {
 			localStorage.setItem('access_token', result.data.token);
