@@ -11,7 +11,7 @@ export default function Exam() {
 		<>
 			{exam.exercises.map((exercise) => {
 				return (
-					<Box sx={{ border: '1px solid red' }}>
+					<Box key={exercise.id} sx={{ border: '1px solid red' }}>
 						<Box>{exercise.id}</Box>
 						<Exercise key={exercise.id} exercise={exercise} canSelect={true} />
 					</Box>
