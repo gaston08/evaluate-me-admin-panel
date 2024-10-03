@@ -51,7 +51,8 @@ export default function Create() {
 						text: '',
 					},
 				],
-				pts: exercises[0].pts ,
+				pts: exercises[0].pts,
+				referenceId: '',
 			});
 
 			/*setCurrentExercise({
@@ -61,6 +62,7 @@ export default function Create() {
 				options: exercises[0].options,
 				correctOptions: exercises[0].correctOptions,
 				pts: exercises[0].pts,
+				referenceId: '',
 			});*/
 		} else {
 			setCurrentExercise({
@@ -77,6 +79,7 @@ export default function Create() {
 					},
 				],
 				pts: '',
+				referenceId: '',
 			});
 		}
 	}, [exercises]);

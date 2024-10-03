@@ -22,4 +22,5 @@ export const defaultCurrentExercise = {
 	],
 	pts: '',
 	options: [[]],
+	argumentId: '',
 };

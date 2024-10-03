@@ -13,6 +13,7 @@ export interface exerciseType {
 	correctOptions: Array<Array<string>>;
 	argument: Array<argumentType>;
 	pts: string;
+	referenceId: string;
 }
 
 export interface argumentType {

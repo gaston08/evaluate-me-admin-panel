@@ -73,6 +73,7 @@ export default function GroupButtons({
 				},
 			],
 			pts: '',
+			referenceId: '',
 		});
 	};
 
@@ -115,7 +116,7 @@ export default function GroupButtons({
 		}
 	};
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleChangePts = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setCurrentExercise((prev: exerciseType) => {
 			return {
 				...prev,
@@ -124,13 +125,24 @@ export default function GroupButtons({
 		});
 	};
 
+	const handleChangeRefId = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setCurrentExercise((prev: exerciseType) => {
+			return {
+				...prev,
+				referenceId: e.target.value,
+			};
+		});
+	};
+
+	console.log(currentExercise.referenceId);
+
 	return (
 		<Box sx={{ mt: 1 }}>
 			<Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1, mb: 2 }}>
 				<TextField
 					sx={{ width: 120 }}
 					value={currentExercise.pts}
-					onChange={handleChange}
+					onChange={handleChangePts}
 					placeholder="Pts"
 				/>
 				<Button color="secondary" variant="contained" onClick={addToExam}>
@@ -142,6 +154,12 @@ export default function GroupButtons({
 				<Button color="error" variant="contained" onClick={resetExercise}>
 					Vaciar
 				</Button>
+				<TextField
+					sx={{ width: 250 }}
+					value={currentExercise.referenceId}
+					onChange={handleChangeRefId}
+					placeholder="refId"
+				/>
 			</Box>
 		</Box>
 	);
