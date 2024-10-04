@@ -6,7 +6,7 @@ import Users from 'app/pages/admin/Users';
 import Links from 'app/pages/admin/Links';
 import Transactions from 'app/pages/admin/Transactions';
 import CreateUser from 'app/pages/admin/CreateUser';
-//import Dashboard from 'app/pages/admin/Dashboard';
+import UpdateUserCoffees from 'app/pages/admin/UpdateUserCoffees';
 
 import { RequireAuthAdmin, NoRequireAuth } from 'app/layouts/auth';
 import { AdminLayout } from 'app/layouts/admin';
@@ -35,6 +35,10 @@ export const arrRoutes = [
           {
             path: '/admin/transactions',
             element: <Transactions />,
+          },
+          {
+            path: '/admin/users/update/coffees',
+            element: <UpdateUserCoffees />,
           },
         ],
       },

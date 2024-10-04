@@ -32,6 +32,15 @@ export default function Links() {
 					create exam
 				</Button>
 			</Box>
+			<Box>
+				<Button
+					variant="contained"
+					component={RouterLink}
+					to="/admin/users/update/coffees"
+				>
+					update coffees
+				</Button>
+			</Box>
 		</Box>
 	);
 }
