@@ -64,7 +64,10 @@ export default function Transactions() {
 							{transactions.map((transaction) => (
 								<TableRow
 									key={transaction._id}
-									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+									sx={{
+										'&:last-child td, &:last-child th': { border: 0 },
+										whiteSpace: 'nowrap',
+									}}
 								>
 									<TableCell component="th" scope="row">
 										{transaction._id}
