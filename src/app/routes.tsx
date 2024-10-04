@@ -1,8 +1,10 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import Error from 'app/pages/error';
 import { Create, Update } from 'app/pages/exam';
 import { SignIn } from 'app/pages/auth';
 import Users from 'app/pages/admin/Users';
+import Links from 'app/pages/admin/Links';
+import Transactions from 'app/pages/admin/Transactions';
 import CreateUser from 'app/pages/admin/CreateUser';
 //import Dashboard from 'app/pages/admin/Dashboard';
 
@@ -12,7 +14,7 @@ import { AdminLayout } from 'app/layouts/admin';
 export const arrRoutes = [
   {
     path: '/',
-    element: <Navigate to="/auth/login" replace />,
+    element: <Links />,
   },
   {
     path: '/admin',
@@ -29,6 +31,10 @@ export const arrRoutes = [
           {
             path: '/admin/users/create',
             element: <CreateUser />,
+          },
+          {
+            path: '/admin/transactions',
+            element: <Transactions />,
           },
         ],
       },

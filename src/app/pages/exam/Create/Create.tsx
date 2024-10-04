@@ -46,8 +46,8 @@ export default function Create() {
 				argument: [
 					{
 						feed: 'oficial',
-						likes: getRandomInt(20, 135),
-						dislikes: getRandomInt(0, 5),
+						likes: getRandomInt(90, 135),
+						dislikes: getRandomInt(0, 3),
 						text: '',
 					},
 				],
