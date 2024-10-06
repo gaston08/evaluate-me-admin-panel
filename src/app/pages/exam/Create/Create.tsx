@@ -74,7 +74,7 @@ export default function Create() {
 					{
 						feed: 'oficial',
 						likes: getRandomInt(13, 31),
-						dislikes: getRandomInt(0, 5),
+						dislikes: getRandomInt(0, 1),
 						text: '',
 					},
 				],
