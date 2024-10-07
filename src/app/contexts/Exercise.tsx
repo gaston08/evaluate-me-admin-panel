@@ -15,8 +15,8 @@ export const defaultCurrentExercise = {
 	argument: [
 		{
 			feed: 'oficial',
-			likes: getRandomInt(13, 31),
-			dislikes: getRandomInt(0, 5),
+			likes: getRandomInt('likes'),
+			dislikes: getRandomInt('dislikes'),
 			text: '',
 		},
 	],

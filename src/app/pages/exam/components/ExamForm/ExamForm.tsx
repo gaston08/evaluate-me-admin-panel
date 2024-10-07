@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, ChangeEvent } from 'react';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+import TextField from '@mui/material/TextField';
 
 import { ExamContext } from 'app/contexts/Exam';
 import { createExam, examType } from 'app/shared/interfaces/exam';
@@ -23,6 +24,22 @@ export default function ExamForm() {
   const [departments, setDepartments] = useState<Array<departmentInterface>>(
     [],
   );
+  const [min_likes, set_min_likes] = useState(() => {
+    const val = localStorage.getItem('min_likes');
+    return val === null ? '' : val;
+  });
+  const [max_likes, set_max_likes] = useState(() => {
+    const val = localStorage.getItem('max_likes');
+    return val === null ? '' : val;
+  });
+  const [min_dislikes, set_min_dislikes] = useState(() => {
+    const val = localStorage.getItem('min_dislikes');
+    return val === null ? '' : val;
+  });
+  const [max_dislikes, set_max_dislikes] = useState(() => {
+    const val = localStorage.getItem('max_dislikes');
+    return val === null ? '' : val;
+  });
 
   const setSubject = (e: SelectChangeEvent) => {
     setDepartments(() => {
@@ -172,6 +189,48 @@ export default function ExamForm() {
               })}
             </Select>
           </FormControl>
+
+          <Box sx={{ display: 'flex', alignItems: 'center', mt: 3 }}>
+            <Box>Likes</Box>
+            <TextField
+              sx={{ width: 60 }}
+              value={min_likes}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                set_min_likes(e.target.value);
+                localStorage.setItem('min_likes', e.target.value);
+              }}
+            />
+            <Box>to</Box>
+            <TextField
+              sx={{ width: 60 }}
+              value={max_likes}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                set_max_likes(e.target.value);
+                localStorage.setItem('max_likes', e.target.value);
+              }}
+            />
+          </Box>
+
+          <Box sx={{ display: 'flex', alignItems: 'center', mt: 3 }}>
+            <Box>Dislikes</Box>
+            <TextField
+              sx={{ width: 60 }}
+              value={min_dislikes}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                set_min_dislikes(e.target.value);
+                localStorage.setItem('min_dislikes', e.target.value);
+              }}
+            />
+            <Box>to</Box>
+            <TextField
+              sx={{ width: 60 }}
+              value={max_dislikes}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                set_max_dislikes(e.target.value);
+                localStorage.setItem('max_dislikes', e.target.value);
+              }}
+            />
+          </Box>
         </AccordionDetails>
       </Accordion>
     </Box>
