@@ -25,7 +25,7 @@ export default function Create() {
 	const [open, setOpen] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 
-	const { seconds, minutes, reset } = useStopwatch({ autoStart: true });
+	const { seconds, minutes } = useStopwatch({ autoStart: true });
 
 	useEffect(() => {
 		if (exercises.length !== 0) {
@@ -90,7 +90,7 @@ export default function Create() {
 	}, [exercises]);
 
 	useEffect(() => {
-		reset();
+		//reset();
 	}, [currentExercise.id]);
 
 	const handleClose = () => {
