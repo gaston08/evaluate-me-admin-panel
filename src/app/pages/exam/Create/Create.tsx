@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { ExercisesContext } from 'app/contexts/Exercises';
 import { ExerciseContext } from 'app/contexts/Exercise';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 import CurrentExerciseForm from 'app/pages/exam/components/CurrentExerciseForm';
 import GroupButtons from 'app/pages/exam/components/CurrentExerciseForm/components/GroupButtons';
 import CreateExamButton from 'app/pages/exam/components/CreateExamButton';
@@ -14,14 +15,17 @@ import { contextExercises } from 'app/shared/interfaces/exercise';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 import { getRandomInt } from 'app/utils/common';
+import { useStopwatch } from 'react-timer-hook';
 
 import '../exam-form.scss';
 
 export default function Create() {
 	const { exercises } = useContext<contextExercises>(ExercisesContext);
-	const { setCurrentExercise } = useContext(ExerciseContext);
+	const { setCurrentExercise, currentExercise } = useContext(ExerciseContext);
 	const [open, setOpen] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
+
+	const { seconds, minutes, reset } = useStopwatch({ autoStart: true });
 
 	useEffect(() => {
 		if (exercises.length !== 0) {
@@ -85,12 +89,21 @@ export default function Create() {
 		}
 	}, [exercises]);
 
+	useEffect(() => {
+		reset();
+	}, [currentExercise.id]);
+
 	const handleClose = () => {
 		setOpen(false);
 	};
 
 	return (
 		<div className="tiptapAppCreateExam">
+			<Box sx={{ position: 'absolute', zIndex: 1000, left: 200, top: 10 }}>
+				<span>
+					{minutes}:{seconds}
+				</span>
+			</Box>
 			<Grid container spacing={1}>
 				<Grid item xs={12} md={4} lg={4}>
 					<LoadExercisesJs />

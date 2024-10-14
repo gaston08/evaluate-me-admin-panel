@@ -38,6 +38,7 @@
     "react-dom": "^18.2.0",
     "react-jwt": "^1.2.1",
     "react-router-dom": "^6.21.1",
+    "react-timer-hook": "^3.0.7",
     "simplebar-react": "^3.2.4",
     "vite-tsconfig-paths": "^4.2.3"
   },
