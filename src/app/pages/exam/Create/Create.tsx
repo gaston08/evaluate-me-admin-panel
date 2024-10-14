@@ -8,6 +8,7 @@ import CreateExamButton from 'app/pages/exam/components/CreateExamButton';
 import Exercises from 'app/pages/exam/components/Exercises';
 import ExamForm from 'app/pages/exam/components/ExamForm';
 import LoadExercisesJs from 'app/pages/exam/components/LoadExercisesJs';
+import LoadOptions from 'app/pages/exam/components/LoadOptions';
 import PreviewExercise from 'app/pages/exam/components/PreviewExercise';
 import { contextExercises } from 'app/shared/interfaces/exercise';
 import Snackbar from '@mui/material/Snackbar';
@@ -93,6 +94,7 @@ export default function Create() {
 			<Grid container spacing={1}>
 				<Grid item xs={12} md={4} lg={4}>
 					<LoadExercisesJs />
+					<LoadOptions />
 					<ExamForm />
 					<CurrentExerciseForm />
 					<CreateExamButton />
